@@ -1,0 +1,19 @@
+.name-popup {
+  --height: 300px;
+  --width: 450px;
+
+  padding: 20px;
+  position: fixed;
+  z-index: 99;
+  top: calc(50% - var(--height) / 2);
+  left: calc(50% - var(--width) / 2);
+  height: fit-content;
+  width: var(--width);
+  background-color: var(--white-color);
+  border-radius: 40px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.name-popup .title {
+  color: var(--text-color);
+}

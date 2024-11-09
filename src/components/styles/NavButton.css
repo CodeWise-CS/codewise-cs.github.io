@@ -1,0 +1,8 @@
+.nav-button {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--white-color);
+  font-size: 20px;
+  margin: 5px;
+}

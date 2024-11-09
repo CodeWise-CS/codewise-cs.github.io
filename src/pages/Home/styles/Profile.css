@@ -1,0 +1,24 @@
+.profile {
+  position: absolute;
+  top: auto;
+  left: auto;
+  height: 200px;
+  width: 300px;
+}
+
+.profile .picture-container {
+  width: 150px;
+}
+
+.profile .upload-image {
+  display: none;
+}
+
+.profile .upload-label {
+  display: block;
+  color: var(--accent-color);
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}

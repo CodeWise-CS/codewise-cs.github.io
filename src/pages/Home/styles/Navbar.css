@@ -1,0 +1,17 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  margin-right: 18px;
+  flex: 1;
+}
+
+.navbar .logo {
+  width: 100%;
+}
+
+.navbar .menu {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}

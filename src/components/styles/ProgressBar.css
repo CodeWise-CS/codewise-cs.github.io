@@ -1,0 +1,28 @@
+.progress-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  font-weight: bold;
+  color: var(--white-color);
+  align-items: center;
+  height: 40px;
+}
+
+.progress-container .progress-bar {
+  display: flex;
+  justify-content: end;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+  font-weight: bold;
+  color: var(--white-color);
+  align-items: center;
+  height: 100%;
+
+  transition-duration: 1s;
+}
+
+.completed {
+  color: var(--accent-color);
+  font-size: 40px;
+  margin-top: 0;
+}

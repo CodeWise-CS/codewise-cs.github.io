@@ -1,0 +1,21 @@
+.main-display {
+  background-color: var(--white-color);
+  --padding: 25px;
+
+  padding: var(--padding);
+  width: calc(78% - 2 * var(--padding));
+  height: calc(100% - 2 * var(--padding));
+  border-radius: 40px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.main-display::-webkit-scrollbar {
+  display: none;
+}
+
+.main-display .section-title {
+  margin-bottom: 20px;
+}

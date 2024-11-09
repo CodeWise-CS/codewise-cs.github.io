@@ -1,0 +1,24 @@
+.not-found {
+  --padding: 18px;
+
+  text-align: center;
+  background-color: var(--white-color);
+  height: calc(100vh - 2 * var(--padding));
+  padding: var(--padding);
+}
+
+.not-found .not-found-image {
+  max-width: 600px;
+  margin-top: 30px;
+}
+
+.not-found .error-text {
+  color: var(--secondary-color);
+  font-size: 45px;
+  margin-bottom: 0;
+}
+
+.not-found .body-text {
+  margin-bottom: 40px;
+  font-size: 18px;
+}

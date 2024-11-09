@@ -1,0 +1,20 @@
+.auth {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--secondary-color);
+}
+
+.benefits {
+  line-height: 24px;
+}
+
+.auth .branding {
+  flex: 1;
+  padding: 40px;
+}
+
+.auth .logo {
+  background: url("src/assets/codewise-logo.svg");
+  width: 200px;
+  aspect-ratio: 4.5;
+}

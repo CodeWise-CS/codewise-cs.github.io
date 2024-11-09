@@ -1,0 +1,7 @@
+.course-overview {
+  --padding: 18px;
+
+  background-color: var(--white-color);
+  height: calc(100vh - 2 * var(--padding));
+  padding: var(--padding);
+}
