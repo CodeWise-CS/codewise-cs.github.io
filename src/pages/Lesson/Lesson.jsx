@@ -8,7 +8,7 @@ import Button from '../../components/Button';
 import Video from '../../components/Video';
 import VideoCard from './VideoCard';
 import SelectVideo from './SelectVideo';
-import Editor, { loader } from '@monaco-editor/react';
+import IDE from './IDE';
 
 export default function Lesson({ lesson, handleEnd }) {
     const { courses } = useContext(CourseContext);
@@ -16,36 +16,13 @@ export default function Lesson({ lesson, handleEnd }) {
     const { course } = useParams();
     const queryParameters = new URLSearchParams(window.location.search);
     const lessonNumber = queryParameters.get('lesson');
-    // const [lesson, setLesson] = useState(null);
-    // const [videoId, setVideoId] = useState(null);
     const [selectedVideo, setSelectedVideo] = useState({});
     const [videoCards, setVideoCards] = useState(null);
     const [selectingVideo, setSelectingVideo] = useState(true);
     const [hasPermission, setHasPermission] = useState(true);
-    const [editorOptions, setEditorOptions] = useState(null);
-
-    useEffect(() => {
-        loader.init().then((monaco) => {
-            monaco.editor.defineTheme('myTheme', {
-                base: 'vs-dark',
-                inherit: true,
-                rules: [],
-                colors: {
-                    'editor.background': '#0a253a',
-                },
-            });
-        });
-        setEditorOptions({
-            fontSize: 18,
-            theme: 'myTheme',
-        });
-    }, []);
-
-    console.log('Lesson: ', lesson);
 
     function selectVideo(newVideo) {
         console.log('Selected ', newVideo);
-        // setVideoId(newVideoId);
         setSelectedVideo(newVideo);
         setSelectingVideo(false);
     }
@@ -53,10 +30,6 @@ export default function Lesson({ lesson, handleEnd }) {
     useEffect(() => {
         console.log('User: ', user);
         if (user) {
-            // if (!user.coursesInProgress) {
-            //   setHasPermission(false)
-            //   Add new course to user data with current lesson equal to 0
-            // }
             if (user.coursesInProgress[course].currentLesson < lessonNumber) {
                 setHasPermission(false);
             }
@@ -72,7 +45,6 @@ export default function Lesson({ lesson, handleEnd }) {
                         onSelected={(newVideoId) => {
                             selectVideo(newVideoId);
                         }}
-                        // id={video.id}
                         video={video}
                         key={index}
                         recommended={!index}
@@ -93,35 +65,6 @@ export default function Lesson({ lesson, handleEnd }) {
                 <h1 className="secondary-text title">
                     {lesson ? lesson.lessonName : 'Loading...'}
                 </h1>
-                {!selectingVideo && (
-                    <div>
-                        <Button
-                            onClick={handleEnd}
-                            styles={{
-                                top: 'auto',
-                                padding: '12px',
-                                marginRight: '8px',
-                                fontSize: '14px',
-                                color: 'var(--secondary-color)',
-                                borderColor: 'var(--secondary-color)',
-                                borderWidth: '2px',
-                                borderStyle: 'solid',
-                            }}
-                            text="Next lesson"
-                            type="transparent"
-                        />
-                        <Button
-                            onClick={() => setSelectingVideo(true)}
-                            styles={{
-                                top: 'auto',
-                                padding: '12px',
-                                fontSize: '14px',
-                            }}
-                            text="Change video"
-                            type="accent"
-                        />
-                    </div>
-                )}
             </div>
             {lesson && (
                 <div className="main-container">
@@ -133,18 +76,41 @@ export default function Lesson({ lesson, handleEnd }) {
                                 end={selectedVideo.endSeconds}
                             />
                         )}
-                        <h3 className="white-text section-header">Console</h3>
+                        {!selectingVideo && (
+                            <div>
+                                <Button
+                                    onClick={handleEnd}
+                                    styles={{
+                                        top: 'auto',
+                                        padding: '12px',
+                                        fontSize: '14px',
+                                        width: 'fit-content',
+                                        marginTop: '18px',
+                                        marginRight: '8px',
+                                    }}
+                                    text="Next lesson"
+                                    type="accent"
+                                />
+                                <Button
+                                    onClick={() => setSelectingVideo(true)}
+                                    styles={{
+                                        top: 'auto',
+                                        padding: '12px',
+                                        fontSize: '14px',
+                                        color: 'var(--secondary-color)',
+                                        borderColor: 'var(--secondary-color)',
+                                        borderWidth: '2px',
+                                        borderStyle: 'solid',
+                                    }}
+                                    text="Change video"
+                                    type="transparent"
+                                />
+                            </div>
+                        )}
                     </div>
                     <div className="code-container">
-                        <h3 className="white-text section-header">Code</h3>
-                        {editorOptions && selectedVideo && (
-                            <Editor
-                                theme="vs-dark"
-                                height={'88%'}
-                                language="javascript"
-                                // options={editorOptions}
-                            />
-                        )}
+                        {/* <h3 className="white-text section-header">Code</h3> */}
+                        <IDE languageID={courses.courses.languageIds[course]} />
                     </div>
                 </div>
             )}

@@ -1,0 +1,11 @@
+.ide-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--white-color);
+    flex: 1.5;
+}
+
+.ide {
+    flex: 1;
+}

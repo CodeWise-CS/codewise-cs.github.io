@@ -1,62 +1,64 @@
 .lesson {
-  --padding: 18px;
-  display: flex;
-  flex-direction: column;
+    --padding: 18px;
+    display: flex;
+    flex-direction: column;
 
-  background-color: var(--white-color);
-  height: calc(100vh - 2 * var(--padding));
-  padding: var(--padding);
+    background-color: var(--white-color);
+    height: calc(100vh - 2 * var(--padding));
+    padding: var(--padding);
 }
 
 .lesson .main-container {
-  display: flex;
-  flex: 1;
+    display: flex;
+    flex: 1;
 }
 
 .lesson .content-container,
 .lesson .code-container {
-  /* overflow: hidden; */
-  display: flex;
-  flex-direction: column;
-  background-color: var(--secondary-color);
-  border-radius: 40px;
-  /* overflow-y: hidden; */
-  /* overflow-x: visible; */
+    /* overflow: hidden; */
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-color);
+    border-radius: 40px;
+    /* overflow-y: hidden; */
+    /* overflow-x: visible; */
 }
 
 .lesson .content-container {
-  overflow: hidden;
+    height: fit-content;
+    background-color: transparent;
+    margin-right: 9px;
+    flex: 1;
 }
 
-.lesson .content-container {
-  margin-right: 9px;
-  flex: 1;
+.lesson .content-container iframe {
+    border-radius: 40px;
 }
 
 .lesson .code-container {
-  margin-left: 9px;
-  flex: 1.5;
+    margin-left: 9px;
+    flex: 1.5;
 }
 
 .lesson .section-header {
-  margin: 5px;
-  text-align: center;
+    margin: 5px;
+    text-align: center;
 }
 
 .lesson .title {
-  margin: 0;
+    margin: 0;
 }
 
 .lesson .lesson-info {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
 }
 
 .lesson .change-video-button {
-  background-color: var(--accent-color);
-  border: none;
-  border-radius: 40px;
-  padding: 0px 10px;
-  color: var(--white-color);
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 40px;
+    padding: 0px 10px;
+    color: var(--white-color);
 }
