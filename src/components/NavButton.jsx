@@ -1,21 +1,19 @@
-import React from "react";
-import "./styles/NavButton.css";
+import React from 'react';
+import './styles/NavButton.css';
 
-function NavButton(props) {
-  const styles = {
-    fontWeight: props.selected && "bold",
-    textDecoration: props.selected && "underline",
-  };
+export default function NavButton({ selected, onClick, text }) {
+    const styles = {
+        fontWeight: selected && 'bold',
+        textDecoration: selected && 'underline',
+    };
 
-  return (
-    <button
-      className="nav-button interactable"
-      onClick={props.onClick}
-      style={styles}
-    >
-      {props.text}
-    </button>
-  );
+    return (
+        <button
+            className="nav-button interactable"
+            onClick={onClick}
+            style={styles}
+        >
+            {text}
+        </button>
+    );
 }
-
-export default NavButton;

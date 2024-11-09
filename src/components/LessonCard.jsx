@@ -1,17 +1,20 @@
-import React from "react";
-import ProgressBar from "./ProgressBar";
-import "./styles/LessonCard.css";
+import React from 'react';
+import ProgressBar from './ProgressBar';
+import './styles/LessonCard.css';
 
-function LessonCard(props) {
-  return (
-    <div
-      className={`lesson-card ${props.completed && "completed-lesson-card"}`}
-      onClick={props.onClick}
-    >
-      <p>{props.lessonName}</p>
-      <ProgressBar progress={props.progress} />
-    </div>
-  );
+export default function LessonCard({
+    completed,
+    onClick,
+    lessonName,
+    progress,
+}) {
+    return (
+        <div
+            className={`lesson-card ${completed && 'completed-lesson-card'}`}
+            onClick={onClick}
+        >
+            <p>{lessonName}</p>
+            <ProgressBar progress={progress} />
+        </div>
+    );
 }
-
-export default LessonCard;

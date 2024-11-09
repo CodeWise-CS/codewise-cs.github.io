@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState } from 'react';
 
 export let CourseContext = React.createContext({
-  courses: null,
-  setCourses: () => {},
+    courses: null,
+    setCourses: () => {},
 });
 
 export function CourseContextProvider({ children, initial }) {
-  const [courses, setCourses] = React.useState(initial);
+    const [courses, setCourses] = useState(initial);
 
-  return (
-    <CourseContext.Provider value={{ courses, setCourses }}>
-      {children}
-    </CourseContext.Provider>
-  );
+    return (
+        <CourseContext.Provider value={{ courses, setCourses }}>
+            {children}
+        </CourseContext.Provider>
+    );
 }

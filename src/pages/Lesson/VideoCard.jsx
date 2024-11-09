@@ -1,30 +1,35 @@
-import React from "react";
-import "./styles/VideoCard.css";
+import React from 'react';
+import './styles/VideoCard.css';
 
-function VideoCard(props) {
-  const textColor = props.recommended ? "white-text" : "secondary-text";
-  const backgroundColor = props.recommended
-    ? "var(--secondary-color)"
-    : "var(--tertiary-color)";
+export default function VideoCard({
+    recommended,
+    onSelected,
+    video,
+    title,
+    channel,
+    length,
+}) {
+    const textColor = recommended ? 'white-text' : 'secondary-text';
+    const backgroundColor = recommended
+        ? 'var(--secondary-color)'
+        : 'var(--tertiary-color)';
 
-  return (
-    <button
-      onClick={() => props.onSelected(props.video)}
-      className="video-card interactable"
-      style={{ backgroundColor: backgroundColor }}
-    >
-      {props.recommended && <p className="accent-text">Recommended</p>}
-      <p className={textColor}>
-        <span className={`bold ${textColor}`}>Title:</span> {props.title}
-      </p>
-      <p className={textColor}>
-        <span className={`bold ${textColor}`}>Channel:</span> {props.channel}
-      </p>
-      <p className={textColor}>
-        <span className={`bold ${textColor}`}>Length:</span> {props.length}
-      </p>
-    </button>
-  );
+    return (
+        <button
+            onClick={() => onSelected(video)}
+            className="video-card interactable"
+            style={{ backgroundColor: backgroundColor }}
+        >
+            {recommended && <p className="accent-text">Recommended</p>}
+            <p className={textColor}>
+                <span className={`bold ${textColor}`}>Title:</span> {title}
+            </p>
+            <p className={textColor}>
+                <span className={`bold ${textColor}`}>Channel:</span> {channel}
+            </p>
+            <p className={textColor}>
+                <span className={`bold ${textColor}`}>Length:</span> {length}
+            </p>
+        </button>
+    );
 }
-
-export default VideoCard;

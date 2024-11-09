@@ -1,17 +1,15 @@
-import React from "react";
-import "./styles/Header.css";
+import React from 'react';
+import './styles/Header.css';
 
-function Header(props) {
-  return (
-    <h1
-      className={`title-text bold header ${
-        props.color ? props.color : "secondary-text"
-      }`}
-      style={props.styles}
-    >
-      {props.text}
-    </h1>
-  );
+export default function Header({ color, styles, text }) {
+    return (
+        <h1
+            className={`title-text bold header ${
+                color ? color : 'secondary-text'
+            }`}
+            style={styles}
+        >
+            {text}
+        </h1>
+    );
 }
-
-export default Header;

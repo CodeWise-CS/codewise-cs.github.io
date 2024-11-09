@@ -1,32 +1,30 @@
-import React from "react";
-import "./styles/Button.css";
+import React from 'react';
+import './styles/Button.css';
 
-function Button(props) {
-  let color = "var(--tertiary-color)";
-  if (props.type === "secondary") {
-    color = "var(--secondary-color)";
-  } else if (props.type === "accent") {
-    color = "var(--accent-color)";
-  } else if (props.type === "transparent") {
-    color = "transparent";
-  }
+export default function Button({ type, styles, bold, onClick, text }) {
+    let color = 'var(--tertiary-color)';
+    if (type === 'secondary') {
+        color = 'var(--secondary-color)';
+    } else if (type === 'accent') {
+        color = 'var(--accent-color)';
+    } else if (type === 'transparent') {
+        color = 'transparent';
+    }
 
-  const styles = {
-    ...props.styles,
-    backgroundColor: color,
-    color: props.type ? "var(--white-color)" : "var(--text-color)",
-    fontWeight: props.bold ? "bold" : "",
-  };
+    const computedStyles = {
+        ...styles,
+        backgroundColor: color,
+        color: type ? 'var(--white-color)' : 'var(--text-color)',
+        fontWeight: bold ? 'bold' : '',
+    };
 
-  return (
-    <button
-      className="button interactable"
-      style={{ ...styles, ...props.styles }}
-      onClick={props.onClick}
-    >
-      {props.text}
-    </button>
-  );
+    return (
+        <button
+            className="button interactable"
+            style={{ ...computedStyles, ...styles }}
+            onClick={onClick}
+        >
+            {text}
+        </button>
+    );
 }
-
-export default Button;

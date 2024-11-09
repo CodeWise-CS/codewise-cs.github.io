@@ -1,27 +1,25 @@
-import React from "react";
-import "./styles/QuizButton.css";
+import { useState, useEffect } from 'react';
+import './styles/QuizButton.css';
 
-function QuizButton(props) {
-  const [buttonClass, setButtonClass] = React.useState("");
+export default function QuizButton({ correct, enabled, text, onAnswer }) {
+    const [buttonClass, setButtonClass] = useState('');
 
-  React.useEffect(() => {
-    if (props.correct && !props.enabled) setButtonClass("correct");
-    else if (props.enabled) setButtonClass("");
-  }, [props.enabled]);
+    useEffect(() => {
+        if (correct && !enabled) setButtonClass('correct');
+        else if (enabled) setButtonClass('');
+    }, [enabled]);
 
-  function handleClick() {
-    if (props.enabled) {
-      setButtonClass(props.correct ? "correct" : "incorrect");
-      props.onAnswer(props.correct);
+    function handleClick() {
+        if (enabled) {
+            setButtonClass(correct ? 'correct' : 'incorrect');
+            onAnswer(correct);
+        }
     }
-  }
 
-  return (
-    <button onClick={handleClick} className={`quiz-button ${buttonClass}`}>
-      {props.text}
-      <div className="circle"></div>
-    </button>
-  );
+    return (
+        <button onClick={handleClick} className={`quiz-button ${buttonClass}`}>
+            {text}
+            <div className="circle"></div>
+        </button>
+    );
 }
-
-export default QuizButton;
