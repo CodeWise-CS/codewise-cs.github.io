@@ -9,3 +9,8 @@
 .ide {
     flex: 1;
 }
+
+.html-css-container {
+    height: 100%;
+    overflow-y: hidden;
+}
