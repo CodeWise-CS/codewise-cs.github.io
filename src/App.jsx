@@ -10,6 +10,7 @@ import './App.css';
 import Auth from './pages/Auth/Auth';
 import Home from './pages/Home/Home';
 import CourseOverview from './pages/CourseOverview/CourseOverview';
+import CareerPathOverview from './pages/CareerPathOverview/CareerPathOverview';
 import NotFound from './pages/NotFound/NotFound';
 import LessonHandler from './pages/Lesson/LessonHandler';
 
@@ -23,14 +24,11 @@ export default function App() {
         // Remove strict mode to reduce Firebase requests
 
         getDownloadURL(sRef(storage, 'codewise-courses.json'))
-            .then((url) => {
-                console.log(url);
-                return fetch(url);
-            })
+            .then((url) => fetch(url))
             .then((response) => response.json())
             .then((data) => setCourses(data))
             .catch((error) => {
-                console.log(error);
+                console.error(error);
             });
 
         onAuthStateChanged(auth, (currentUser) => {
@@ -38,27 +36,15 @@ export default function App() {
                 navigate('/login');
             }
             if (auth.currentUser) {
-                //   const database = getDatabase();
-                //   const userRef = ref(database, "users/" + auth.currentUser.uid);
-                //   onValue(userRef, (snapshot) => {
-                //     const data = snapshot.val();
-                //     if (data) {
-                //       setUser(data);
-                //     } else {
-                //       console.log("Data not found. Snapshot: ", snapshot);
-                //     }
-                //   });
                 updateUser();
             }
         });
 
         function updateUser() {
-            console.log('Update user');
             const database = getDatabase();
             const userRef = ref(database, 'users/' + auth.currentUser.uid);
             onValue(userRef, (snapshot) => {
                 const data = snapshot.val();
-                console.log('User data: ', data);
                 if (data) {
                     setUser(data);
                 } else {
@@ -66,8 +52,6 @@ export default function App() {
                 }
             });
         }
-
-        console.log(user, auth.currentUser);
 
         if (!user && auth.currentUser) {
             updateUser();
@@ -81,6 +65,10 @@ export default function App() {
             <Route
                 path="/course-overview/:course"
                 element={<CourseOverview />}
+            />
+            <Route
+                path="/career-path-overview/:careerPath"
+                element={<CareerPathOverview />}
             />
             <Route path="/lesson/:course" element={<LessonHandler />} />
             <Route path="*" element={<NotFound />} />

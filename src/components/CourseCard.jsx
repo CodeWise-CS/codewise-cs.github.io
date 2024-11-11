@@ -16,7 +16,7 @@ export default function CourseCard({ courseName }) {
 
     useEffect(() => {
         if (user && courses) {
-            const tempProgress = user.coursesInProgress.courseNames.includes(
+            const tempProgress = user.coursesInProgress?.courseNames.includes(
                 courseName
             )
                 ? user.coursesInProgress[courseName].currentLesson
@@ -26,7 +26,6 @@ export default function CourseCard({ courseName }) {
             setLessonTitle(
                 courses.courses[courseName][tempProgress].lessonName
             );
-            console.log(user, courses);
         }
     }, [courses, user]);
 

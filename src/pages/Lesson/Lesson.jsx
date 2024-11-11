@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { setUserData } from '../../firebase';
 import './styles/Lesson.css';
 import { useParams } from 'react-router-dom';
 import { CourseContext } from '../../context/CourseContext';
@@ -22,15 +23,36 @@ export default function Lesson({ lesson, handleEnd }) {
     const [hasPermission, setHasPermission] = useState(true);
 
     function selectVideo(newVideo) {
-        console.log('Selected ', newVideo);
         setSelectedVideo(newVideo);
         setSelectingVideo(false);
     }
 
     useEffect(() => {
-        console.log('User: ', user);
         if (user) {
-            if (user.coursesInProgress[course].currentLesson < lessonNumber) {
+            if (!user.coursesInProgress) {
+                setUserData([course], 'coursesInProgress/courseNames');
+                setUserData(
+                    {
+                        currentLesson: 0,
+                        testGrade: 96,
+                    },
+                    `coursesInProgress/${course}`
+                );
+            } else if (!user.coursesInProgress.courseNames.includes(course)) {
+                setUserData(
+                    [...user.coursesInProgress.courseNames, course],
+                    'coursesInProgress/courseNames'
+                );
+                setUserData(
+                    {
+                        currentLesson: 0,
+                        testGrade: 96,
+                    },
+                    `coursesInProgress/${course}`
+                );
+            } else if (
+                user.coursesInProgress[course].currentLesson < lessonNumber
+            ) {
                 setHasPermission(false);
             }
         }

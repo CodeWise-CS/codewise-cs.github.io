@@ -14,7 +14,6 @@ export default function Auth() {
 
     function handleSignUp(_user) {
         setSignedUp(true);
-        console.log(_user);
         setUser(_user);
     }
 
@@ -22,7 +21,6 @@ export default function Auth() {
     // Read data from realtime database and display lessons in progress if present.
 
     function addName(firstName, lastName) {
-        console.log(user);
         updateProfile(auth.currentUser, {
             displayName: `${firstName} ${lastName}`,
             photoURL:
@@ -31,10 +29,7 @@ export default function Auth() {
             .then(() => {
                 navigate('/');
             })
-            .catch((error) => {
-                console.log(error);
-                navigate('/');
-            });
+            .catch((error) => navigate('/'));
     }
 
     function switchAuth() {

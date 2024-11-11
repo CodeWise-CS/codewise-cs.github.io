@@ -11,7 +11,7 @@ export default function PathGrid({ course, courseName }) {
     const { user } = useContext(UserContext);
     let rows = null;
 
-    const completedLessons = user.coursesInProgress.courseNames.includes(
+    const completedLessons = user.coursesInProgress?.courseNames.includes(
         courseName
     )
         ? user.coursesInProgress[courseName].currentLesson
@@ -48,18 +48,13 @@ export default function PathGrid({ course, courseName }) {
                 <React.Fragment key={index}>
                     <div className="horizontal-line"></div>
                     <LessonCard
-                        onClick={() => {
-                            console.log(
-                                `/lesson/${courseName}?lesson=${
-                                    index * 2 + (progress === 50 ? 1 : 0)
-                                }`
-                            );
+                        onClick={() =>
                             navigate(
                                 `/lesson/${courseName}?lesson=${
                                     index * 2 + (progress === 50 ? 1 : 0)
                                 }`
-                            );
-                        }}
+                            )
+                        }
                         lessonName={item.lessonName}
                         completed={completed}
                         progress={progress}
@@ -72,18 +67,13 @@ export default function PathGrid({ course, courseName }) {
             <div className={row % 2 ? "right-line" : "left-line"}></div>
           )} */}
                     <LessonCard
-                        onClick={() => {
-                            console.log(
-                                `/lesson/${courseName}?lesson=${
-                                    index * 2 + (progress === 50 ? 1 : 0)
-                                }`
-                            );
+                        onClick={() =>
                             navigate(
                                 `/lesson/${courseName}?lesson=${
                                     index * 2 + (progress === 50 ? 1 : 0)
                                 }`
-                            );
-                        }}
+                            )
+                        }
                         lessonName={item.lessonName}
                         completed={completed}
                         progress={progress}

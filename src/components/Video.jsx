@@ -5,10 +5,6 @@ export default function Video({ start, end, embedId }) {
     const startString = start ? `&start=${start}` : '';
     const endString = end ? `&end=${end}` : '';
 
-    console.log(
-        `https://www.youtube.com/embed/${embedId}?si=e6oILBnSNCNuGNHU${startString}${endString}`
-    );
-
     return (
         <div className="video">
             <iframe

@@ -6,17 +6,14 @@ import CourseGrid from '../../components/CourseGrid';
 export default function ExploreCourses() {
     let { courses } = useContext(CourseContext);
     courses = courses.courses;
-    console.log('Courses: ', courses);
     let cardData = [];
 
     if (courses) {
         const courseNames = courses.courseNames;
-        const cardCount = courseNames.length <= 10 ? courseNames.length : 10;
+        const cardCount = courseNames.length; //<= 10 ? courseNames.length : 10;
 
         for (let i = 0; i < cardCount; i++) {
             let course = courses[courseNames[i]];
-            console.log(course.length);
-            console.log(course);
             cardData.push({
                 courseName: courseNames[i],
                 courseLength: course.length,
@@ -27,9 +24,6 @@ export default function ExploreCourses() {
 
     return (
         <div className="explore-courses">
-            {/* <h1 className="title-text secondary-text bold section-title">
-        Explore courses
-      </h1> */}
             <Header text="Explore courses" styles={{ marginBottom: '20px' }} />
             {courses && <CourseGrid cardData={cardData} />}
         </div>

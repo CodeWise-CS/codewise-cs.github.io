@@ -17,7 +17,6 @@ export default function CourseOverview() {
     if (courses) {
         if (courses.courses.courseNames.includes(course)) {
             currentCourse = courses.courses[course];
-            console.log(currentCourse);
         } else {
             found = false;
         }
@@ -26,7 +25,13 @@ export default function CourseOverview() {
     return (
         <div className="course-overview">
             <TopNavbar />
-            <h1 className="secondary-text">{capitalize(course)}</h1>
+            <h1 className="secondary-text">
+                {courses
+                    ? courses.courses.cardData[course]
+                        ? courses.courses.cardData[course].title
+                        : capitalize(course)
+                    : 'Loading...'}
+            </h1>
             {found && user ? (
                 currentCourse ? (
                     <PathGrid course={currentCourse} courseName={course} />

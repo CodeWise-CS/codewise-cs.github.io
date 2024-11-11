@@ -18,10 +18,7 @@ export default function LessonHandler() {
     );
     const [lesson, setLesson] = useState(null);
 
-    console.log(courses);
-
     function handleEnd(accuracy) {
-        console.log('handle end: ', user);
         if (user) {
             if (user.coursesInProgress[course].currentLesson == lessonNumber) {
                 // setUserData(course, { currentLesson: Number(lessonNumber) + 1 }, `coursesInProgress`);

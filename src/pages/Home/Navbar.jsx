@@ -26,9 +26,14 @@ export default function Navbar({ changePage, page }) {
                     />
                     <NavButton
                         onClick={() => changePage(2)}
-                        text="Profile"
+                        text="Career paths"
                         selected={page === 2}
                     />
+                    {/* <NavButton
+                        onClick={() => changePage(3)}
+                        text="Profile"
+                        selected={page === 3}
+                    /> */}
                 </div>
                 <Button
                     onClick={logOut}

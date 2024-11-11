@@ -1,0 +1,13 @@
+.course-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+.course-list .divider {
+    height: 30px;
+    width: 5px;
+    background-color: var(--accent-color);
+}

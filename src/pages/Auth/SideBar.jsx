@@ -38,14 +38,12 @@ function SideBar({ authType, onSignUp, switchAuth }) {
     async function login(event) {
         event.preventDefault();
         try {
-            console.log(formData.email);
             const userCredentials = await signInWithEmailAndPassword(
                 auth,
                 formData.email,
                 formData.password
             );
             const user = userCredentials.user;
-            console.log(user);
             changePage('/');
         } catch (error) {
             setFormErrors((oldFormErrors) => ({
@@ -64,16 +62,11 @@ function SideBar({ authType, onSignUp, switchAuth }) {
                 formData.password
             );
             const user = userCredentials.user;
-            console.log(user.uid);
             createUser(user.uid);
             setFormErrors({ password: '', email: '' });
-            console.log('BEFORE setting user context');
             const contextUser = await getUserData(user.uid);
-            console.log('Set user context', contextUser);
             onSignUp(contextUser);
         } catch (error) {
-            console.log(error.code);
-            console.log(error);
             if (error.code == 'auth/email-already-in-use') {
                 setFormErrors((oldFormErrors) => ({
                     ...oldFormErrors,

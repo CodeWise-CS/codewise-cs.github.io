@@ -1,0 +1,40 @@
+.career-path-card {
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--tertiary-color);
+    border: none;
+    border-radius: 40px;
+    text-align: left;
+    width: 896px;
+}
+
+.career-path-card .title {
+    color: var(--secondary-color);
+    font-weight: bold;
+    font-size: 37px;
+    float: left;
+    margin-bottom: 29px;
+    text-align: center;
+    height: fit-content;
+}
+
+.career-path-card ol {
+    padding: 0 30px;
+    margin-top: 0;
+    font-size: 23px;
+    line-height: 32px;
+}
+
+.career-path-card .top-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.career-path-card .save-button {
+    background-color: transparent;
+    border: none;
+}

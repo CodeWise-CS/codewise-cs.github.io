@@ -1,4 +1,4 @@
-.dashboard .career-path-container {
+.career-paths {
     display: flex;
     flex-direction: column;
     gap: 20px;
