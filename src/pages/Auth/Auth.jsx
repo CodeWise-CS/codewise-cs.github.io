@@ -3,7 +3,7 @@ import SideBar from './SideBar';
 import NamePopup from '../Home/NamePopup';
 import { updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase';
+import { auth, setUserData } from '../../firebase';
 import './styles/Auth.css';
 
 export default function Auth() {
@@ -13,14 +13,14 @@ export default function Auth() {
     const navigate = useNavigate();
 
     function handleSignUp(_user) {
+        console.log('HANDLED SIGN UP: ', user);
         setSignedUp(true);
         setUser(_user);
     }
 
-    // Research other data to store (such as profile image).
-    // Read data from realtime database and display lessons in progress if present.
+    function addName({ firstName, lastName, username }) {
+        setUserData(username, 'username');
 
-    function addName(firstName, lastName) {
         updateProfile(auth.currentUser, {
             displayName: `${firstName} ${lastName}`,
             photoURL:

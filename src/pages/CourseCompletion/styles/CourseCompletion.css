@@ -1,4 +1,4 @@
-.exercise {
+.course-completion {
     --padding: 18px;
 
     display: flex;
@@ -8,37 +8,39 @@
     padding: var(--padding);
 }
 
-.exercise .title {
+.course-completion .title {
     margin: 10px;
 }
 
-.exercise .main-content {
+.course-completion .main-content {
     background-color: var(--secondary-color);
     border-radius: 40px;
     flex: 1;
     padding-bottom: 40px;
     overflow: hidden;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-.exercise .question-count {
+.course-completion .question-count {
     text-align: center;
 }
 
-.exercise .result-title {
+.course-completion .result-title {
     text-align: center;
     margin-bottom: 40px;
 }
 
-.exercise .correct-count {
+.course-completion .correct-count {
     text-align: center;
     font-size: 18px;
     margin: 8px;
 }
 
-.exercise .results {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+.course-completion .certificate-container {
+    overflow: hidden;
+    flex: 1;
+    padding: 0 40px;
 }

@@ -1,24 +1,38 @@
 .profile {
-  position: absolute;
-  top: auto;
-  left: auto;
-  height: 200px;
-  width: 300px;
+    display: flex;
+    height: 100%;
+    gap: 20px;
 }
 
-.profile .picture-container {
-  width: 150px;
+.profile .info {
+    flex: 0.6;
 }
 
-.profile .upload-image {
-  display: none;
+.profile .info .display-name {
+    margin: 0;
 }
 
-.profile .upload-label {
-  display: block;
-  color: var(--accent-color);
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 10px;
+.profile .info .username {
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.profile .content {
+    flex: 1.4;
+}
+
+.profile .content > div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile .section-header {
+    margin: 0;
+}
+
+.profile .name-input-container {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
 }

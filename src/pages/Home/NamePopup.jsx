@@ -7,17 +7,22 @@ export default function NamePopup({ onSubmit }) {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
+        username: '',
     });
     const [errors, setErrors] = useState({
         firstName: '',
         lastName: '',
+        username: '',
     });
+
+    // TODO: Limit the length of the bio, username, and display name
+    // TODO: Fundamental problem of users changing profile information to download course certificates for friends
 
     function handleChange(event) {
         const { name, value } = event.target;
         setFormData((oldFormData) => ({
             ...oldFormData,
-            [name]: value,
+            [name]: value.replace(' ', ''),
         }));
 
         setErrors((oldErrors) => ({
@@ -39,8 +44,13 @@ export default function NamePopup({ onSubmit }) {
                 ...oldErrors,
                 lastName: 'Please enter your last name',
             }));
+        } else if (!formData.username) {
+            setErrors((oldErrors) => ({
+                ...oldErrors,
+                username: 'Please enter a username',
+            }));
         } else {
-            onSubmit(formData.firstName, formData.lastName);
+            onSubmit(formData);
         }
     }
 
@@ -63,6 +73,14 @@ export default function NamePopup({ onSubmit }) {
                     onChange={handleChange}
                     title="Last name"
                     error={errors.lastName}
+                />
+                <TextInput
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    title="Username"
+                    error={errors.username}
                 />
                 <Button
                     text="Submit"

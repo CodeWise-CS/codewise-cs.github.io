@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
+    updateProfile,
 } from 'firebase/auth';
 import { auth, createUser, getUserData } from '../../firebase';
 
@@ -31,10 +32,6 @@ function SideBar({ authType, onSignUp, switchAuth }) {
         }));
     }
 
-    function changePage(to) {
-        navigate(to);
-    }
-
     async function login(event) {
         event.preventDefault();
         try {
@@ -44,7 +41,7 @@ function SideBar({ authType, onSignUp, switchAuth }) {
                 formData.password
             );
             const user = userCredentials.user;
-            changePage('/');
+            navigate('/');
         } catch (error) {
             setFormErrors((oldFormErrors) => ({
                 ...oldFormErrors,
@@ -62,6 +59,9 @@ function SideBar({ authType, onSignUp, switchAuth }) {
                 formData.password
             );
             const user = userCredentials.user;
+            updateProfile(auth.currentUser, {
+                displayName: `Unnamed User`,
+            });
             createUser(user.uid);
             setFormErrors({ password: '', email: '' });
             const contextUser = await getUserData(user.uid);

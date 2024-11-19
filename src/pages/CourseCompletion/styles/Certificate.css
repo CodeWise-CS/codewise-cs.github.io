@@ -1,0 +1,81 @@
+.certificate {
+    display: flex;
+    margin: auto;
+    text-align: center;
+    flex-direction: column;
+    /* align-items: center; */
+    background-color: var(--white-color);
+    aspect-ratio: 1.414;
+    max-height: 100%;
+    font-size: 100%;
+    /* overflow: hidden; */
+}
+
+.certificate .logo {
+    width: 30%;
+    margin-top: 2%;
+    margin: auto auto;
+    margin-bottom: 0;
+}
+
+.certificate .title {
+    font-weight: normal;
+}
+
+.certificate .separator {
+    height: 1.5%;
+    margin: 2% auto;
+    width: 15%;
+    background-color: var(--accent-color);
+    border-radius: 100px;
+}
+
+.certificate .full-name {
+    margin: 0 2%;
+    width: calc(100% - 4%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.certificate .bottom-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #cecece;
+    margin-top: auto;
+    height: 24%;
+    width: 100%;
+}
+
+.certificate .bottom-container *:not(.course-logo) {
+    flex: 1;
+}
+
+.certificate .course-logo {
+    height: 80%;
+    aspect-ratio: 1;
+}
+
+.certificate .info {
+    text-decoration: underline;
+    color: black;
+}
+
+.certificate .download-button {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: var(--white-color);
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.loader-container {
+    background-color: var(--white-color);
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

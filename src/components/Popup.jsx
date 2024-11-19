@@ -11,8 +11,9 @@ export default function Popup({
 }) {
     return (
         <div className="popup">
-            <h1 className="title">{title}</h1>
+            <h1 className="title secondary-text">{title}</h1>
             {bodyText && <h3 className="body-text">{bodyText}</h3>}
+            {children}
             <div className="menu">
                 <Button
                     text="Cancel"
@@ -31,7 +32,6 @@ export default function Popup({
                     }}
                 />
             </div>
-            {children}
         </div>
     );
 }

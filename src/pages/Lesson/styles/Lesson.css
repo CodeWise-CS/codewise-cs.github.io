@@ -18,7 +18,6 @@
     /* overflow: hidden; */
     display: flex;
     flex-direction: column;
-    background-color: var(--secondary-color);
     border-radius: 40px;
     /* overflow-y: hidden; */
     /* overflow-x: visible; */

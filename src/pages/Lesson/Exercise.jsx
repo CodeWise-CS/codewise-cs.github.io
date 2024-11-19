@@ -96,8 +96,9 @@ export default function Exercise({ lesson, handleEnd }) {
                         <Button
                             text="Next lesson"
                             type="transparent"
+                            textColor="var(--white-color)"
                             onClick={() => {
-                                handleEnd((correctCount / length) * 100);
+                                handleEnd(length, correctCount);
                             }}
                             styles={{
                                 borderColor: 'var(--white-color)',

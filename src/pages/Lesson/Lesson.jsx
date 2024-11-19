@@ -28,13 +28,15 @@ export default function Lesson({ lesson, handleEnd }) {
     }
 
     useEffect(() => {
-        if (user) {
+        // Stop from resetting coursesInProgress/{courseName} after user changes when last lesson is completed
+        if (user && !user.completedCourses?.includes(course)) {
             if (!user.coursesInProgress) {
                 setUserData([course], 'coursesInProgress/courseNames');
                 setUserData(
                     {
                         currentLesson: 0,
-                        testGrade: 96,
+                        questionsAnswered: 0,
+                        correctAnswers: 0,
                     },
                     `coursesInProgress/${course}`
                 );
@@ -46,7 +48,8 @@ export default function Lesson({ lesson, handleEnd }) {
                 setUserData(
                     {
                         currentLesson: 0,
-                        testGrade: 96,
+                        questionsAnswered: 0,
+                        correctAnswers: 0,
                     },
                     `coursesInProgress/${course}`
                 );

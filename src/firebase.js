@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signOut } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
-import { getDatabase, ref, set, child, get } from 'firebase/database';
+import { getDatabase, ref, set, child, get, remove } from 'firebase/database';
 
 const firebaseConfig = {
     apiKey: 'AIzaSyCMdByUlf7Cg-fCaTl2McQ2FTCA0GAN77I',
@@ -24,6 +24,7 @@ export function logOut() {
 }
 
 export function createUser(uid) {
+    console.log('CREATE USER: ', uid);
     const data = {
         completedLessons: [],
         careerPaths: [],

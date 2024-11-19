@@ -6,7 +6,7 @@
     border: none;
     border-radius: 40px;
     text-align: left;
-    width: 896px;
+    max-width: 896px;
 }
 
 .career-path-card .title {

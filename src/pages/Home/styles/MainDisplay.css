@@ -8,12 +8,6 @@
     border-radius: 40px;
     overflow-x: hidden;
     overflow-y: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.main-display::-webkit-scrollbar {
-    display: none;
 }
 
 .main-display .section-title {

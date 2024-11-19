@@ -1,8 +1,8 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import TopNavbar from '../../components/TopNavbar';
 import PathGrid from '../../components/PathGrid';
 import capitalize from '../../utils/capitalize';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CourseContext } from '../../context/CourseContext';
 import './styles/CourseOverview.css';
 import { UserContext } from '../../context/UserContext';
@@ -11,6 +11,7 @@ export default function CourseOverview() {
     const { course } = useParams();
     const { courses } = useContext(CourseContext);
     const { user } = useContext(UserContext);
+    const navigate = useNavigate();
     let currentCourse = null;
     let found = true;
 
@@ -21,6 +22,16 @@ export default function CourseOverview() {
             found = false;
         }
     }
+
+    useEffect(() => {
+        if (
+            user?.completedCourses &&
+            user.completedCourses.find((_course) => _course.name === course) &&
+            courses
+        ) {
+            navigate(`/completed/${course}`);
+        }
+    }, [user, courses]);
 
     return (
         <div className="course-overview">

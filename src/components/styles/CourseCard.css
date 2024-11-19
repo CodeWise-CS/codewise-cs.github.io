@@ -21,7 +21,7 @@
 
 .course-card .current-lesson {
     text-align: start;
-    padding-left: 30px;
+    padding: 0 30px;
     font-size: 18px;
 }
 

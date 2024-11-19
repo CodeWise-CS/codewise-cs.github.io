@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import Exercise from './Exercise';
 import Lesson from './Lesson';
 import { UserContext } from '../../context/UserContext';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CourseContext } from '../../context/CourseContext';
 import './styles/LessonHandler.css';
 import { setUserData } from '../../firebase';
@@ -17,15 +17,72 @@ export default function LessonHandler() {
         queryParameters.get('lesson')
     );
     const [lesson, setLesson] = useState(null);
+    const navigate = useNavigate();
 
-    function handleEnd(accuracy) {
+    function handleFinishedCourse() {
+        const finalAccuracy =
+            (user.coursesInProgress[course].correctAnswers /
+                user.coursesInProgress[course].questionsAnswered) *
+            100;
+        setUserData({}, `coursesInProgress/${course}`);
+        setUserData(
+            user.coursesInProgress.courseNames.filter(
+                (name) => name !== course
+            ),
+            'coursesInProgress/courseNames'
+        );
+        console.log(
+            'SET COMPLETED COURSE: ',
+            user.completedCourses
+                ? [
+                      ...user.completedCourses,
+                      { name: course, accuracy: finalAccuracy },
+                  ]
+                : [{ name: course, accuracy: finalAccuracy }]
+        );
+        setUserData(
+            user.completedCourses
+                ? [
+                      ...user.completedCourses,
+                      { name: course, accuracy: finalAccuracy },
+                  ]
+                : [{ name: course, accuracy: finalAccuracy }],
+            'completedCourses'
+        );
+        navigate(`/completed/${course}`);
+    }
+
+    function handleEnd(questionCount, correctCount) {
         if (user) {
+            if (Number(lessonNumber) + 1 == courses.courses[course].length) {
+                handleFinishedCourse();
+                return;
+            }
             if (user.coursesInProgress[course].currentLesson == lessonNumber) {
-                // setUserData(course, { currentLesson: Number(lessonNumber) + 1 }, `coursesInProgress`);
-                setUserData(
-                    Number(lessonNumber) + 1,
-                    `coursesInProgress/${course}/currentLesson`
-                );
+                let newCorrectCount = correctCount;
+                let newQuestionCount = questionCount;
+
+                if (user.coursesInProgress && user.coursesInProgress[course]) {
+                    newCorrectCount +=
+                        user.coursesInProgress[course].questionsAnswered;
+                    newQuestionCount +=
+                        user.coursesInProgress[course].correctAnswers;
+                }
+                if (questionCount !== undefined && correctCount !== undefined) {
+                    setUserData(
+                        {
+                            currentLesson: Number(lessonNumber) + 1,
+                            questionsAnswered: newQuestionCount,
+                            correctAnswers: newCorrectCount,
+                        },
+                        `coursesInProgress/${course}`
+                    );
+                } else {
+                    setUserData(
+                        Number(lessonNumber) + 1,
+                        `coursesInProgress/${course}/currentLesson`
+                    );
+                }
             }
             queryParameters.set('lesson', Number(lessonNumber) + 1);
             setLessonNumber(Number(lessonNumber) + 1);

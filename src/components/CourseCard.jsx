@@ -20,11 +20,17 @@ export default function CourseCard({ courseName }) {
                 courseName
             )
                 ? user.coursesInProgress[courseName].currentLesson
+                : user.completedCourses?.find(
+                      (course) => course.name === courseName
+                  )
+                ? courses.courses[courseName].length
                 : 0;
             setLength(courses.courses[courseName].length);
             setProgress(tempProgress);
             setLessonTitle(
-                courses.courses[courseName][tempProgress].lessonName
+                courses.courses[courseName][tempProgress]
+                    ? courses.courses[courseName][tempProgress].lessonName
+                    : undefined
             );
         }
     }, [courses, user]);
@@ -57,9 +63,16 @@ export default function CourseCard({ courseName }) {
                 </div>
             )}
             <div className="info-section">
-                <p className="secondary-text current-lesson">
-                    <span className="bold">Current lesson:</span> {lessonTitle}
-                </p>
+                {lessonTitle ? (
+                    <p className="secondary-text current-lesson">
+                        <span className="bold">Current lesson:</span>{' '}
+                        {lessonTitle}
+                    </p>
+                ) : (
+                    <p className="secondary-text current-lesson">
+                        <span className="bold">Course completed</span>
+                    </p>
+                )}
                 <ProgressBar progress={Math.round((progress / length) * 100)} />
             </div>
         </button>

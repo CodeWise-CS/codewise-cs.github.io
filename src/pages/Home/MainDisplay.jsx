@@ -6,7 +6,12 @@ import './styles/MainDisplay.css';
 import CareerPaths from './CareerPaths';
 
 export default function MainDisplay({ page }) {
-    const pages = [<Dashboard />, <ExploreCourses />, <CareerPaths />];
+    const pages = [
+        <Dashboard />,
+        <ExploreCourses />,
+        <CareerPaths />,
+        <Profile />,
+    ];
 
     return <div className="main-display">{pages[page]}</div>;
 }

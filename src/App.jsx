@@ -13,6 +13,7 @@ import CourseOverview from './pages/CourseOverview/CourseOverview';
 import CareerPathOverview from './pages/CareerPathOverview/CareerPathOverview';
 import NotFound from './pages/NotFound/NotFound';
 import LessonHandler from './pages/Lesson/LessonHandler';
+import CourseCompletion from './pages/CourseCompletion/CourseCompletion';
 
 export default function App() {
     const navigate = useNavigate();
@@ -71,6 +72,7 @@ export default function App() {
                 element={<CareerPathOverview />}
             />
             <Route path="/lesson/:course" element={<LessonHandler />} />
+            <Route path="/completed/:course" element={<CourseCompletion />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );
