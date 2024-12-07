@@ -1,5 +1,44 @@
 .search-bar {
-  padding: 10px;
-  border: none;
-  border-radius: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: var(--default-radius);
+    width: calc(100% - 20px);
+}
+
+.input-container .results {
+    z-index: 999;
+    min-width: 210px;
+    background-color: var(--secondary-color);
+    width: calc(30% - 45px);
+    padding: 14px;
+    border-radius: 0 0 20px 20px;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+}
+
+.input-container .results.hidden {
+    display: none;
+}
+
+.input-container a {
+    color: white;
+    text-decoration: none;
+    transition-duration: 0.1s;
+}
+
+.input-container a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.input-container .result {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-container .course-logo {
+    width: 30px;
 }
