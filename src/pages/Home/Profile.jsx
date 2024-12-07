@@ -21,12 +21,78 @@ export default function Profile() {
         username: user ? user.username : 'Username',
         bio: user ? user.bio : 'Bio',
     });
+    const [errors, setErrors] = useState({
+        firstName: '',
+        lastName: '',
+        username: '',
+        bio: '',
+    });
+
+    useEffect(() => {
+        if (newInfo && newInfo.displayName) {
+            setErrors({ firstName: '', lastName: '', username: '', bio: '' });
+        }
+    }, [newInfo]);
+
+    function checkValid() {
+        let valid = true;
+
+        if (
+            auth.currentUser.displayName === 'Unnamed User' &&
+            !newInfo.displayName.split(' ')[0]
+        ) {
+            valid = false;
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                firstName: 'Please enter a first name',
+            }));
+        }
+
+        if (
+            auth.currentUser.displayName === 'Unnamed User' &&
+            !newInfo.displayName.split(' ')[1]
+        ) {
+            valid = false;
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                lastName: 'Please enter a last name',
+            }));
+        }
+
+        if (!newInfo.username) {
+            valid = false;
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                username: 'Please enter a username',
+            }));
+        }
+
+        if (newInfo.username?.length > 25) {
+            valid = false;
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                username: 'Please enter a maximum of 25 characters',
+            }));
+        }
+
+        if (newInfo.bio?.length > 200) {
+            valid = false;
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                bio: 'Please enter a maximum of 200 characters',
+            }));
+        }
+
+        return valid;
+    }
 
     function openEditProfileModal() {
         setEditProfileVisible(true);
     }
 
     async function handleConfirm() {
+        if (!checkValid()) return;
+
         setUserData(newInfo.username, 'username');
         setUserData(newInfo.bio, 'bio');
         if (auth.currentUser.displayName === 'Unnamed User') {
@@ -74,6 +140,7 @@ export default function Profile() {
                                     }))
                                 }
                                 title="First name"
+                                error={errors.firstName}
                             />
                             <TextInput
                                 type="text"
@@ -90,6 +157,7 @@ export default function Profile() {
                                     }))
                                 }
                                 title="Last name"
+                                error={errors.lastName}
                             />
                         </div>
                     )}
@@ -103,6 +171,7 @@ export default function Profile() {
                             }))
                         }
                         title="Username"
+                        error={errors.username}
                     />
                     <TextInput
                         type="text"
@@ -114,6 +183,7 @@ export default function Profile() {
                             }))
                         }
                         title="Bio"
+                        error={errors.bio}
                     />
                 </Popup>
             )}
