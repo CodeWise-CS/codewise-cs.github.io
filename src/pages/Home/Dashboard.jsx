@@ -87,13 +87,25 @@ export default function Dashboard() {
     return (
         <div className="dashboard">
             <Header text="In progress" styles={{ marginBottom: '20px' }} />
-            {courseData && <CourseGrid cardData={courseData} />}
+            {courseData ? (
+                <CourseGrid cardData={courseData} />
+            ) : (
+                <p className="body-text">
+                    Courses you have started will be listed here
+                </p>
+            )}
             <Header
                 text="Saved career paths"
                 styles={{ margin: '40px 0 20px 0' }}
             />
             <div className="career-path-container">
-                {user?.careerPaths && pathCards}
+                {user?.careerPaths ? (
+                    pathCards
+                ) : (
+                    <p className="body-text">
+                        Saved career paths will be listed here
+                    </p>
+                )}
             </div>
         </div>
     );

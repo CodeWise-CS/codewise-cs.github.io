@@ -5,11 +5,17 @@
     padding: var(--padding);
     width: calc(78% - 2 * var(--padding));
     height: calc(100% - 2 * var(--padding));
-    border-radius: 40px;
+    border-radius: var(--default-radius);
     overflow-x: hidden;
     overflow-y: auto;
 }
 
 .main-display .section-title {
     margin-bottom: 20px;
+}
+
+@media (max-width: 960px) {
+    .main-display {
+        width: calc(100% -2 * var(--padding));
+    }
 }

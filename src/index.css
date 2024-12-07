@@ -2,10 +2,13 @@
     --accent-color: #1fc1c2;
     --secondary-color: #0a253a;
     --tertiary-color: #dde0e1;
+    --light-gray: #eaeaea;
     --white-color: #efefee;
     --text-color: #3a3a39;
     --error-color: #e33124;
     --success-color: #00a36c;
+
+    --default-radius: 30px;
 
     font-family: Inter, sans-serif, Arial, Helvetica;
 }
@@ -19,6 +22,12 @@ body {
 html {
     padding: 0;
     margin: 0;
+}
+
+select {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--light-gray);
 }
 
 .accent-text {

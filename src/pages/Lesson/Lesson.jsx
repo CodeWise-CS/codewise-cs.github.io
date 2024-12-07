@@ -101,37 +101,35 @@ export default function Lesson({ lesson, handleEnd }) {
                                 end={selectedVideo.endSeconds}
                             />
                         )}
-                        {!selectingVideo && (
-                            <div>
-                                <Button
-                                    onClick={handleEnd}
-                                    styles={{
-                                        top: 'auto',
-                                        padding: '12px',
-                                        fontSize: '14px',
-                                        width: 'fit-content',
-                                        marginTop: '18px',
-                                        marginRight: '8px',
-                                    }}
-                                    text="Next lesson"
-                                    type="accent"
-                                />
-                                <Button
-                                    onClick={() => setSelectingVideo(true)}
-                                    styles={{
-                                        top: 'auto',
-                                        padding: '12px',
-                                        fontSize: '14px',
-                                        color: 'var(--secondary-color)',
-                                        borderColor: 'var(--secondary-color)',
-                                        borderWidth: '2px',
-                                        borderStyle: 'solid',
-                                    }}
-                                    text="Change video"
-                                    type="transparent"
-                                />
-                            </div>
-                        )}
+                        <div>
+                            <Button
+                                onClick={handleEnd}
+                                styles={{
+                                    top: 'auto',
+                                    padding: '12px',
+                                    fontSize: '14px',
+                                    width: 'fit-content',
+                                    marginTop: '18px',
+                                    marginRight: '8px',
+                                }}
+                                text="Next lesson"
+                                type="accent"
+                            />
+                            <Button
+                                onClick={() => setSelectingVideo(true)}
+                                styles={{
+                                    top: 'auto',
+                                    padding: '12px',
+                                    fontSize: '14px',
+                                    color: 'var(--secondary-color)',
+                                    borderColor: 'var(--secondary-color)',
+                                    borderWidth: '2px',
+                                    borderStyle: 'solid',
+                                }}
+                                text="Change video"
+                                type="transparent"
+                            />
+                        </div>
                     </div>
                     <div className="code-container">
                         {/* <h3 className="white-text section-header">Code</h3> */}

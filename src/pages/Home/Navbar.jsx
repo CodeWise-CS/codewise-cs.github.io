@@ -1,18 +1,34 @@
-import React from 'react';
+import { useState } from 'react';
 import { logOut } from '../../firebase';
 import NavButton from '../../components/NavButton';
 import Button from '../../components/Button';
+import menuIcon from '../../assets/menu.svg';
 import './styles/Navbar.css';
 
 export default function Navbar({ changePage, page }) {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
+
     return (
         <div className="navbar">
-            <img
-                className="logo"
-                src="src/assets/codewise-logo.svg"
-                alt="CodeWise logo"
-            />
-            <div className="menu">
+            <div className="hamburger-container">
+                <img
+                    className="logo"
+                    src="src/assets/codewise-logo.svg"
+                    alt="CodeWise logo"
+                />
+                <button
+                    className="hamburger interactable"
+                    onClick={toggleMenu}
+                    aria-label="Toggle menu"
+                >
+                    <img src={menuIcon} />
+                </button>
+            </div>
+            <div className={`menu ${menuOpen ? 'open' : ''}`}>
                 <div>
                     <NavButton
                         onClick={() => changePage(0)}

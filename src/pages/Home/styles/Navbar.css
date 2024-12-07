@@ -1,17 +1,60 @@
 .navbar {
-  display: flex;
-  flex-direction: column;
-  margin-right: 18px;
-  flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 18px;
+    flex: 1;
+}
+
+.navbar .hamburger {
+    display: none;
+    background-color: transparent;
+    border: none;
 }
 
 .navbar .logo {
-  width: 100%;
+    width: 100%;
 }
 
 .navbar .menu {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+}
+
+@media (max-width: 960px) {
+    .navbar {
+        margin-bottom: 18px;
+    }
+
+    .navbar .hamburger {
+        display: block;
+    }
+
+    .hamburger-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .navbar .menu {
+        display: none;
+        flex-direction: column;
+    }
+
+    .navbar .menu.open {
+        display: flex;
+    }
+
+    .navbar .menu div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar .menu div * {
+        width: fit-content;
+    }
+
+    .navbar .logo {
+        width: 300px;
+    }
 }

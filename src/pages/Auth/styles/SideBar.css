@@ -1,85 +1,85 @@
 .side-bar {
-  background-color: var(--white-color);
-  height: 100vh;
-  width: 42%;
-  border-top-left-radius: 40px;
-  border-bottom-left-radius: 40px;
-  overflow-y: auto;
-  overflow-x: hidden;
+    background-color: var(--white-color);
+    height: 100vh;
+    width: 42%;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .side-bar .auth-options {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 10px 40px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 10px 40px;
 }
 
 .side-bar > .title {
-  font-size: 45px;
-  font-weight: bold;
-  color: var(--secondary-color);
-  text-align: center;
+    font-size: 45px;
+    font-weight: bold;
+    color: var(--secondary-color);
+    text-align: center;
 }
 
 .side-bar .option-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  align-items: center;
-  padding: 30px 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    padding: 30px 15px;
 
-  background-color: var(--tertiary-color);
-  border: none;
-  border-radius: 40px;
-  font-size: 20px;
-  min-width: 0px;
+    background-color: var(--tertiary-color);
+    border: none;
+    border-radius: var(--default-radius);
+    font-size: 20px;
+    min-width: 0px;
 }
 
 .side-bar .option-button > .option-text {
-  margin: 10px;
-  font-size: 18px;
+    margin: 10px;
+    font-size: 18px;
 }
 
 .side-bar .option-button > .logo-img {
-  height: 50px;
+    height: 50px;
 }
 
 .side-bar .separator {
-  text-align: center;
+    text-align: center;
 }
 
 .side-bar .info-form {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  margin: 10px 40px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin: 10px 40px;
 }
 
 .side-bar .switch-auth {
-  border: none;
-  background: none;
-  font-size: 16px;
+    border: none;
+    background: none;
+    font-size: 16px;
 }
 
 .side-bar .switch-account-text {
-  margin: 40px;
+    margin: 40px;
 }
 
 @media (max-width: 1080px) {
-  .side-bar .auth-options {
-    grid-template-columns: repeat(1, 1fr);
-    margin: 10px 20px;
-  }
+    .side-bar .auth-options {
+        grid-template-columns: repeat(1, 1fr);
+        margin: 10px 20px;
+    }
 
-  .side-bar .option-button {
-    padding: 10px;
-  }
+    .side-bar .option-button {
+        padding: 10px;
+    }
 
-  .side-bar .info-form {
-    margin: 10px 20px;
-  }
+    .side-bar .info-form {
+        margin: 10px 20px;
+    }
 
-  .side-bar .switch-account-text {
-    margin: 20px;
-  }
+    .side-bar .switch-account-text {
+        margin: 20px;
+    }
 }

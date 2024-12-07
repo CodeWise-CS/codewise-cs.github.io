@@ -14,7 +14,7 @@
 
 .course-completion .main-content {
     background-color: var(--secondary-color);
-    border-radius: 40px;
+    border-radius: var(--default-radius);
     flex: 1;
     padding-bottom: 40px;
     overflow: hidden;

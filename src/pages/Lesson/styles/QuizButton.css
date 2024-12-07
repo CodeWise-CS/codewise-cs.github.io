@@ -1,50 +1,50 @@
 .quiz-button {
-  background-color: transparent;
-  color: var(--white-color);
-  border-color: var(--tertiary-color);
-  border-style: solid;
-  margin: 10px;
-  padding: 25px;
-  text-align: start;
-  border-radius: 40px;
-  border-width: 2px;
-  font-size: 18px;
+    background-color: transparent;
+    color: var(--white-color);
+    border-color: var(--tertiary-color);
+    border-style: solid;
+    margin: 10px;
+    padding: 25px;
+    text-align: start;
+    border-radius: var(--default-radius);
+    border-width: 2px;
+    font-size: 18px;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  transition-duration: 0.15s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.15s;
 }
 
 .quiz-button:hover {
-  border-color: var(--accent-color);
+    border-color: var(--accent-color);
 }
 
 .quiz-button .square {
-  background-color: transparent;
-  border-color: var(--tertiary-color);
-  border-width: 2px;
-  border-style: solid;
-  width: 28px;
-  height: 28px;
-  border-radius: 5px;
+    background-color: transparent;
+    border-color: var(--tertiary-color);
+    border-width: 2px;
+    border-style: solid;
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
 }
 
 .quiz-button .circle {
-  background-color: transparent;
-  border-color: var(--tertiary-color);
-  border-width: 2px;
-  border-style: solid;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+    background-color: transparent;
+    border-color: var(--tertiary-color);
+    border-width: 2px;
+    border-style: solid;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
 }
 
 .quiz-button.correct {
-  background-color: var(--success-color);
+    background-color: var(--success-color);
 }
 
 .quiz-button.incorrect {
-  background-color: var(--error-color);
+    background-color: var(--error-color);
 }

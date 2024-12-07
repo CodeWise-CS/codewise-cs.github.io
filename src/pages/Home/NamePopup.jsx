@@ -33,23 +33,51 @@ export default function NamePopup({ onSubmit }) {
 
     function handleSubmit(event) {
         event.preventDefault();
+        let valid = true;
 
         if (!formData.firstName) {
+            valid = false;
             setErrors((oldErrors) => ({
                 ...oldErrors,
                 firstName: 'Please enter your first name',
             }));
-        } else if (!formData.lastName) {
+        }
+        if (!formData.lastName) {
+            valid = false;
             setErrors((oldErrors) => ({
                 ...oldErrors,
                 lastName: 'Please enter your last name',
             }));
-        } else if (!formData.username) {
+        }
+        if (!formData.username) {
+            valid = false;
             setErrors((oldErrors) => ({
                 ...oldErrors,
                 username: 'Please enter a username',
             }));
-        } else {
+        }
+        if (formData.firstName.length > 15) {
+            valid = false;
+            setErrors((oldErrors) => ({
+                ...oldErrors,
+                firstName: 'Please enter a maximum of 15 characters',
+            }));
+        }
+        if (formData.lastName.length > 15) {
+            valid = false;
+            setErrors((oldErrors) => ({
+                ...oldErrors,
+                lastName: 'Please enter a maximum of 15 characters',
+            }));
+        }
+        if (formData.username.length > 25) {
+            valid = false;
+            setErrors((oldErrors) => ({
+                ...oldErrors,
+                username: 'Please enter a maximum of 25 characters',
+            }));
+        }
+        if (valid) {
             onSubmit(formData);
         }
     }

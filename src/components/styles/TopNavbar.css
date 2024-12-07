@@ -7,7 +7,7 @@
     /* height: 50px; */
     width: calc(100% -2 * var(--padding));
     background-color: var(--secondary-color);
-    border-radius: 40px;
+    border-radius: var(--default-radius);
     /* padding-left: var(--padding);
   padding-right: var(--padding); */
     padding: var(--padding);
@@ -17,6 +17,7 @@
     width: fit-content;
 }
 
-.top-navbar input {
+.top-navbar .input-container {
     width: 30%;
+    min-width: 240px;
 }

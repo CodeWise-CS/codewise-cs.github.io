@@ -19,10 +19,22 @@ export default function LessonHandler() {
     const [lesson, setLesson] = useState(null);
     const navigate = useNavigate();
 
-    function handleFinishedCourse() {
+    function handleFinishedCourse(questionCount, correctCount) {
+        console.log(
+            'correctCount: ',
+            correctCount,
+            'quesionCount: ',
+            questionCount,
+            'userCorrectAnswers: ',
+            user.coursesInProgress[course].correctAnswers,
+            'userQuestionsAnswered: ',
+            user.coursesInProgress[course].questionsAnswered
+        );
+
         const finalAccuracy =
-            (user.coursesInProgress[course].correctAnswers /
-                user.coursesInProgress[course].questionsAnswered) *
+            ((user.coursesInProgress[course].correctAnswers + correctCount) /
+                (user.coursesInProgress[course].questionsAnswered +
+                    questionCount)) *
             100;
         setUserData({}, `coursesInProgress/${course}`);
         setUserData(
@@ -55,7 +67,7 @@ export default function LessonHandler() {
     function handleEnd(questionCount, correctCount) {
         if (user) {
             if (Number(lessonNumber) + 1 == courses.courses[course].length) {
-                handleFinishedCourse();
+                handleFinishedCourse(questionCount, correctCount);
                 return;
             }
             if (user.coursesInProgress[course].currentLesson == lessonNumber) {

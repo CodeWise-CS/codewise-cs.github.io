@@ -18,7 +18,7 @@
     /* overflow: hidden; */
     display: flex;
     flex-direction: column;
-    border-radius: 40px;
+    border-radius: var(--default-radius);
     /* overflow-y: hidden; */
     /* overflow-x: visible; */
 }
@@ -31,7 +31,7 @@
 }
 
 .lesson .content-container iframe {
-    border-radius: 40px;
+    border-radius: var(--default-radius);
 }
 
 .lesson .code-container {
@@ -57,7 +57,14 @@
 .lesson .change-video-button {
     background-color: var(--accent-color);
     border: none;
-    border-radius: 40px;
+    border-radius: var(--default-radius);
     padding: 0px 10px;
     color: var(--white-color);
+}
+
+@media (max-width: 950px) {
+    .lesson .main-container {
+        flex-direction: column;
+        gap: 40px;
+    }
 }

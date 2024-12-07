@@ -1,10 +1,16 @@
 .home {
-  --padding: 18px;
+    --padding: 18px;
 
-  background-color: var(--secondary-color);
-  display: flex;
-  justify-content: right;
-  padding: var(--padding);
-  width: calc(100vw - 2 * var(--padding));
-  height: calc(100vh - 2 * var(--padding));
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: right;
+    padding: var(--padding);
+    width: calc(100vw - 2 * var(--padding));
+    height: calc(100vh - 2 * var(--padding));
+}
+
+@media (max-width: 960px) {
+    .home {
+        flex-direction: column;
+    }
 }

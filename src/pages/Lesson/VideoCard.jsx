@@ -12,7 +12,7 @@ export default function VideoCard({
     const textColor = recommended ? 'white-text' : 'secondary-text';
     const backgroundColor = recommended
         ? 'var(--secondary-color)'
-        : 'var(--tertiary-color)';
+        : 'var(--light-gray)';
 
     return (
         <button

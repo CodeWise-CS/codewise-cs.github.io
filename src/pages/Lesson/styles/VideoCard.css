@@ -1,16 +1,16 @@
 .video-card {
-  display: block;
-  text-align: start;
-  width: calc(100% - 20px);
-  border: none;
-  border-radius: 40px;
-  padding: 10px 20px;
-  cursor: pointer;
+    display: block;
+    text-align: start;
+    width: calc(100% - 20px);
+    border: none;
+    border-radius: var(--default-radius);
+    padding: 10px 20px;
+    cursor: pointer;
 
-  margin: 9px;
+    margin: 9px;
 }
 
 .video-card p {
-  margin: 5px;
-  font-size: 16px;
+    margin: 5px;
+    font-size: 16px;
 }

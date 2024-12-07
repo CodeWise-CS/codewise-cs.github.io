@@ -1,18 +1,18 @@
 .text-input {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .text-input > .title {
-  font-weight: bold;
-  margin: 0;
-  margin-bottom: 5px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 5px;
 }
 
 .text-input > .input-field {
-  --padding: 14px;
+    --padding: 14px;
 
-  background-color: var(--tertiary-color);
-  padding: var(--padding);
-  border-radius: 40px;
-  width: calc(100% - 2 * var(--padding));
+    background-color: var(--tertiary-color);
+    padding: var(--padding);
+    border-radius: var(--default-radius);
+    width: calc(100% - 2 * var(--padding));
 }

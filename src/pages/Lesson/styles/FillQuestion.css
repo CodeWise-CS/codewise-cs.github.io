@@ -1,74 +1,74 @@
 .fill-question .title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-  white-space: pre-line;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    white-space: pre-line;
 }
 
 .fill-question .code-text {
-  color: var(--white-color);
+    color: var(--white-color);
 }
 
 .fill-question .input-field {
-  color: var(--secondary-color);
-  background-color: var(--white-color);
-  border: none;
-  padding: 5px;
-  border-radius: 5px;
-  max-width: calc(360px);
-  width: 100px;
+    color: var(--secondary-color);
+    background-color: var(--white-color);
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    max-width: calc(360px);
+    width: 100px;
 }
 
 .fill-question input {
-  min-width: 30px;
-  border: none;
-  margin: 0 5px;
-  font-size: 1em;
-  padding: 2px;
-  max-width: calc(360px);
-  box-sizing: content-box;
+    min-width: 30px;
+    border: none;
+    margin: 0 5px;
+    font-size: 1em;
+    padding: 2px;
+    max-width: calc(360px);
+    box-sizing: content-box;
 }
 
 .fill-question .hidden-span {
-  visibility: hidden;
-  position: absolute;
-  white-space: pre;
-  max-width: calc(360px);
-  font-size: 1em;
+    visibility: hidden;
+    position: absolute;
+    white-space: pre;
+    max-width: calc(360px);
+    font-size: 1em;
 }
 
 .fill-question .dynamic-input {
-  border: none;
-  background-color: var(--white-color);
-  color: var(--secondary-color);
-  border-radius: 5px;
-  margin: 5px;
-  font-size: 1em;
-  max-width: calc(360px);
-  padding: 5px;
-  box-sizing: content-box;
+    border: none;
+    background-color: var(--white-color);
+    color: var(--secondary-color);
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 1em;
+    max-width: calc(360px);
+    padding: 5px;
+    box-sizing: content-box;
 }
 
 .fill-question .input-container {
-  border-width: 2px;
-  border-style: solid;
-  border-color: var(--white-color);
-  border-radius: 40px;
-  padding: 20px;
-  margin: 10px 40px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--white-color);
+    border-radius: var(--default-radius);
+    padding: 20px;
+    margin: 10px 40px;
 }
 
 .fill-question .answer-text {
-  color: var(--white-color);
-  margin: 5px 40px;
-  margin-bottom: 20px;
-  white-space: pre-line;
+    color: var(--white-color);
+    margin: 5px 40px;
+    margin-bottom: 20px;
+    white-space: pre-line;
 }
 
 .fill-question .answer-title {
-  color: var(--error-color);
-  margin: 5px 40px;
-  margin-top: 20px;
-  white-space: pre-line;
+    color: var(--error-color);
+    margin: 5px 40px;
+    margin-top: 20px;
+    white-space: pre-line;
 }

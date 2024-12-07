@@ -4,7 +4,7 @@
     flex-direction: column;
     background-color: var(--tertiary-color);
     border: none;
-    border-radius: 40px;
+    border-radius: var(--default-radius);
     text-align: left;
     max-width: 896px;
 }

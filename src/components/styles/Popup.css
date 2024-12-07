@@ -1,16 +1,28 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99;
+}
+
 .popup {
     --height: 300px;
     --width: 450px;
 
+    text-align: start;
     padding: 20px;
     position: fixed;
     z-index: 99;
     top: calc(50% - var(--height) / 2);
     left: calc(50% - var(--width) / 2);
-    height: var(--height);
+    height: fit-content;
+    max-height: var(--height);
     width: var(--width);
-    background-color: var(--white-color);
-    border-radius: 40px;
+    background-color: white;
+    /* background-color: var(--white-color); */
+    border-radius: var(--default-radius);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     overflow-y: scroll;
 }
@@ -18,7 +30,7 @@
 .popup .menu {
     display: flex;
     gap: 5px;
-    justify-content: end;
+    /* justify-content: end; */
 }
 
 .popup .body-text {

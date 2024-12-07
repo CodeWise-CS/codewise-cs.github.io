@@ -8,8 +8,8 @@
     top: 50%;
     left: 50%;
     margin: -215px 0 0 -315px;
-    background: var(--white-color);
-    border-radius: 40px;
+    background: #ffffff;
+    border-radius: var(--default-radius);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
     padding: 15px;
 }
