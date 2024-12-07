@@ -99,41 +99,6 @@ function SideBar({ authType, onSignUp, switchAuth }) {
     return (
         <div className="side-bar">
             <h1 className="title">{title}</h1>
-            <div className="auth-options">
-                <button className="option-button interactable">
-                    <img
-                        className="logo-img"
-                        src="src/assets/google-logo.png"
-                        alt="Google logo"
-                    />
-                    <p className="option-text">Google</p>
-                </button>
-                <button className="option-button interactable">
-                    <img
-                        className="logo-img"
-                        src="src/assets/facebook-logo.png"
-                        alt="Facebook logo"
-                    />
-                    <p className="option-text">Facebook</p>
-                </button>
-                <button className="option-button interactable">
-                    <img
-                        className="logo-img"
-                        src="src/assets/github-logo.png"
-                        alt="GitHub logo"
-                    />
-                    <p className="option-text">GitHub</p>
-                </button>
-                <button className="option-button interactable">
-                    <img
-                        className="logo-img"
-                        src="src/assets/apple-logo.png"
-                        alt="Apple logo"
-                    />
-                    <p className="option-text">Apple</p>
-                </button>
-            </div>
-            <p className="separator">OR</p>
             <form
                 onSubmit={authType === 'login' ? login : signUp}
                 className="info-form"
