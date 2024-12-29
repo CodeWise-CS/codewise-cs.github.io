@@ -1,4 +1,5 @@
 .lesson-card {
+    all: unset; /* Reset all styles */
     height: 130px;
     border-radius: var(--default-radius);
     background-color: var(--tertiary-color);
@@ -17,6 +18,10 @@
 .lesson-card:hover {
     scale: 1.03;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.lesson-card:focus {
+    outline: solid;
 }
 
 .completed-lesson-card {

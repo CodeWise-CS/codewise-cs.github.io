@@ -1,21 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
-import './styles/SearchBar.css';
 import { CourseContext } from '../context/CourseContext';
+import filter from '../utils/filter';
+import './styles/SearchBar.css';
 
 export default function SearchBar() {
     const { courses } = useContext(CourseContext);
     const [courseCards, setCourseCards] = useState();
     const [search, setSearch] = useState('');
     const [visible, setVisible] = useState(false);
-
-    function filter(array, searchString) {
-        const sanitize = (str) =>
-            str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-
-        const sanitizedSearch = sanitize(searchString);
-
-        return array.filter((item) => sanitize(item).includes(sanitizedSearch));
-    }
 
     useEffect(() => {
         const handleClick = (event) => {

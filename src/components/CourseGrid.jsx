@@ -3,9 +3,11 @@ import CourseCard from './CourseCard';
 import './styles/CourseGrid.css';
 
 export default function CourseGrid({ cardData }) {
+    console.log('Card data 2: ', cardData);
     const cards = cardData.map((item) => {
         return (
             <CourseCard
+                key={item.courseName}
                 courseName={item.courseName}
                 courseLength={item.courseLength}
                 description={item.description}
@@ -13,5 +15,5 @@ export default function CourseGrid({ cardData }) {
         );
     });
 
-    return <div className="grid-container">{...cards}</div>;
+    return <div className="grid-container">{cards}</div>;
 }

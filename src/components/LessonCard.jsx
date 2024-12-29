@@ -9,12 +9,12 @@ export default function LessonCard({
     progress,
 }) {
     return (
-        <div
+        <button
             className={`lesson-card ${completed && 'completed-lesson-card'}`}
             onClick={onClick}
         >
             <p>{lessonName}</p>
             <ProgressBar progress={progress} />
-        </div>
+        </button>
     );
 }
