@@ -29,7 +29,7 @@ export default function ProgressBar({ progress, barColor }) {
         >
             {progress === 0 && <p>{progress}%</p>}
             <div className="progress-bar" style={styles}>
-                {progress}%
+                {Math.round(progress * 10) / 10}%
             </div>
         </div>
     );

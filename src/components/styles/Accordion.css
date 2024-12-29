@@ -1,0 +1,45 @@
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-x: hidden;
+}
+
+.accordion .accordion-item {
+    border-radius: 8px;
+    border-style: solid;
+    border-color: var(--secondary-color);
+}
+
+.accordion .accordion-item:first-child {
+    border-radius: 20px 20px 8px 8px;
+}
+
+.accordion .accordion-item:last-child {
+    border-radius: 8px 8px 20px 20px;
+}
+
+.accordion .accordion-content {
+    display: none;
+    text-align: start;
+    white-space: pre-wrap;
+}
+
+.accordion .accordion-content.active {
+    display: block;
+}
+
+.accordion .accordion-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.accordion .icon {
+    transform: rotate(0deg);
+    transition-duration: 0.2s;
+}
+
+.accordion .icon.active {
+    transform: rotate(180deg);
+}

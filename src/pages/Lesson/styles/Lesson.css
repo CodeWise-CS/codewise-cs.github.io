@@ -15,17 +15,13 @@
 
 .lesson .content-container,
 .lesson .code-container {
-    /* overflow: hidden; */
     display: flex;
     flex-direction: column;
     border-radius: var(--default-radius);
-    /* overflow-y: hidden; */
-    /* overflow-x: visible; */
 }
 
 .lesson .content-container {
-    height: fit-content;
-    background-color: transparent;
+    height: calc(100vh - 2 * var(--padding) - 100px);
     margin-right: 9px;
     flex: 1;
 }
@@ -60,6 +56,12 @@
     border-radius: var(--default-radius);
     padding: 0px 10px;
     color: var(--white-color);
+}
+
+.content-container .accordion-container {
+    flex: 1;
+    margin-top: 20px;
+    overflow-y: scroll;
 }
 
 @media (max-width: 950px) {

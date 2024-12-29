@@ -10,6 +10,7 @@ import Video from '../../components/Video';
 import VideoCard from './VideoCard';
 import SelectVideo from './SelectVideo';
 import IDE from './IDE';
+import Accordion from '../../components/Accordion';
 
 export default function Lesson({ lesson, handleEnd }) {
     const { courses } = useContext(CourseContext);
@@ -128,6 +129,14 @@ export default function Lesson({ lesson, handleEnd }) {
                                 }}
                                 text="Change video"
                                 type="transparent"
+                            />
+                        </div>
+                        <div className="accordion-container">
+                            <h2 style={{ marginTop: '0px' }}>
+                                Practice exercises
+                            </h2>
+                            <Accordion
+                                data={lesson.exercises ? lesson.exercises : []}
                             />
                         </div>
                     </div>
