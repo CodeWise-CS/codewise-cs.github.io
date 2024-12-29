@@ -37,11 +37,14 @@ export default function Exercise({ lesson, handleEnd }) {
 
     useEffect(() => {
         if (user) {
-            if (user.coursesInProgress[course].currentLesson < lessonNumber) {
+            if (user.coursesInProgress[course].currentLesson != lessonNumber) {
+                console.log('No permission');
                 setHasPermission(false);
             }
         }
     }, [user]);
+
+    console.log('Has permission', hasPermission);
 
     return hasPermission ? (
         <div className="exercise">
@@ -114,7 +117,11 @@ export default function Exercise({ lesson, handleEnd }) {
         </div>
     ) : (
         <div>
-            <p>You must complete the previous lessons to view this one</p>
+            <p>
+                {user?.coursesInProgress[course].currentLesson < lessonNumber
+                    ? 'You must complete the previous lessons to view this one'
+                    : 'You have already completed this quiz'}
+            </p>
         </div>
     );
 }
