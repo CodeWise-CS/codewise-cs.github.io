@@ -1,5 +1,5 @@
 .lesson-card {
-    all: unset; /* Reset all styles */
+    all: unset;
     height: 130px;
     border-radius: var(--default-radius);
     background-color: var(--tertiary-color);

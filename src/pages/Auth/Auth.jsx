@@ -42,25 +42,48 @@ export default function Auth() {
         <div className="auth">
             {signedUp && <NamePopup onSubmit={addName} />}
             <div className="branding">
-                <div className="logo" alt="CodeWise logo"></div>
-                <ul className="benefits">
-                    <li className="white-text">
-                        <span className="accent-text bold">Interactive</span>{' '}
-                        courses
-                    </li>
-                    <li className="white-text">
-                        <span className="accent-text bold">Beginner</span> to{' '}
-                        <span className="accent-text bold">advanced</span>
-                    </li>
-                    <li className="white-text">
-                        Completely{' '}
-                        <span className="accent-text bold">free</span>
-                    </li>
-                    <li className="white-text">
-                        Earn{' '}
-                        <span className="accent-text bold">certificates</span>
-                    </li>
-                </ul>
+                <img
+                    className="logo"
+                    src="src/assets/codewise-logo.svg"
+                    alt="CodeWise logo"
+                />
+                <div className="info-container">
+                    <h1>Beginner to Advanced</h1>
+                    <div className="grid">
+                        <div className="grid-item">
+                            <img src="src/assets/free-icon.svg" />
+                            <p>
+                                Access every course and resource for{' '}
+                                <span className="bold">free</span>
+                            </p>
+                        </div>
+                        <div className="grid-item">
+                            <img src="src/assets/tools-icon.svg" />
+                            <p>
+                                Learn with videos, quizzes, code compilation,
+                                and exercises
+                            </p>
+                        </div>
+                        <div className="grid-item">
+                            <img src="src/assets/certificate-icon.svg" />
+                            <p>
+                                Earn{' '}
+                                <span className="bold">
+                                    certificates of completion
+                                </span>{' '}
+                                for your courses
+                            </p>
+                        </div>
+                        <div className="grid-item">
+                            <img src="src/assets/path-icon.svg" />
+                            <p>
+                                Prepare yourself for a job by following{' '}
+                                <span className="bold">career paths</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div className="graphic-container"></div>
+                </div>
             </div>
             <SideBar
                 switchAuth={switchAuth}

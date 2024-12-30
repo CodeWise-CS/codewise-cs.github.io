@@ -1,20 +1,87 @@
 .auth {
-  display: flex;
-  justify-content: space-between;
-  background-color: var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--secondary-color);
 }
 
 .benefits {
-  line-height: 24px;
+    line-height: 24px;
 }
 
 .auth .branding {
-  flex: 1;
-  padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    padding: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100vh - 40px);
 }
 
 .auth .logo {
-  background: url("src/assets/codewise-logo.svg");
-  width: 200px;
-  aspect-ratio: 4.5;
+    background: url('src/assets/codewise-logo.svg');
+    width: 200px;
+    aspect-ratio: 4.5;
+}
+
+.auth .info-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.auth h1,
+.auth .grid p {
+    color: white;
+}
+
+.auth .grid {
+    padding: 0px 90px;
+    padding-top: 20px;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: auto auto;
+    color: var(--accent-color);
+}
+
+.auth .grid-item {
+    display: flex;
+    align-items: start;
+    gap: 10px;
+}
+
+.auth .grid-item span {
+    color: var(--accent-color);
+}
+
+.auth .grid-item * {
+    margin-top: 0px;
+}
+
+.auth .graphic-container {
+    flex: 1;
+    width: 100%;
+    background-image: url('src/assets/Login graphic.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+@media (max-width: 1200px) {
+    .auth .grid {
+        padding: 20px 0px;
+    }
+}
+
+@media (max-width: 590px) {
+    .auth .grid {
+        padding: 20px 0px;
+        gap: 0px;
+        grid-template-columns: auto;
+        overflow-y: scroll;
+        max-height: 100%;
+    }
 }
