@@ -7,6 +7,7 @@ import Button from '../../components/Button';
 import { useParams } from 'react-router-dom';
 import MultipleChoice from './MultipleChoice';
 import FillQuestion from './FillQuestion';
+import UnautharizedLesson from './UnautharizedLesson';
 
 export default function Exercise({ lesson, handleEnd }) {
     const { course } = useParams();
@@ -116,12 +117,15 @@ export default function Exercise({ lesson, handleEnd }) {
             </div>
         </div>
     ) : (
-        <div>
-            <p>
-                {user?.coursesInProgress[course].currentLesson < lessonNumber
-                    ? 'You must complete the previous lessons to view this one'
-                    : 'You have already completed this quiz'}
-            </p>
+        <div className="lesson">
+            <UnautharizedLesson
+                message={
+                    user?.coursesInProgress[course].currentLesson < lessonNumber
+                        ? 'You must complete the previous lessons to view this quiz'
+                        : 'You have already completed this quiz'
+                }
+                course={course}
+            />
         </div>
     );
 }

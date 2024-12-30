@@ -18,7 +18,11 @@ export default function FillQuestion({ text, question, nextQuestion }) {
 
                 return word.includes('\n') ? (
                     <React.Fragment key={index}>
-                        <Input index={index} handleChange={handleChange} />
+                        <Input
+                            index={index}
+                            handleChange={handleChange}
+                            value=""
+                        />
                         <br />
                     </React.Fragment>
                 ) : (
@@ -26,6 +30,7 @@ export default function FillQuestion({ text, question, nextQuestion }) {
                         index={index}
                         handleChange={handleChange}
                         key={index}
+                        value=""
                     />
                 );
             }
@@ -61,6 +66,13 @@ export default function FillQuestion({ text, question, nextQuestion }) {
         setCorrect(tempCorrect);
     }
 
+    function handleNext() {
+        const wasCorrect = correct;
+        setCorrect(null);
+        setInputs({});
+        nextQuestion(wasCorrect);
+    }
+
     return (
         <div className="fill-question">
             <h3 className="white-text title">{question}</h3>
@@ -85,11 +97,7 @@ export default function FillQuestion({ text, question, nextQuestion }) {
                 text={correct === null ? 'Submit' : 'Next'}
                 type="accent"
                 bold={true}
-                onClick={
-                    correct === null
-                        ? handleSubmit
-                        : () => nextQuestion(correct)
-                }
+                onClick={correct === null ? handleSubmit : handleNext}
                 styles={{
                     padding: '10px 24px',
                     margin: '0 40px',

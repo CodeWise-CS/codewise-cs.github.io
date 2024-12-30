@@ -11,6 +11,7 @@ import VideoCard from './VideoCard';
 import SelectVideo from './SelectVideo';
 import IDE from './IDE';
 import Accordion from '../../components/Accordion';
+import UnautharizedLesson from './UnautharizedLesson';
 
 export default function Lesson({ lesson, handleEnd }) {
     const { courses } = useContext(CourseContext);
@@ -149,7 +150,10 @@ export default function Lesson({ lesson, handleEnd }) {
         </div>
     ) : (
         <div className="lesson">
-            <p>You must complete the previous lessons to view this one</p>
+            <UnautharizedLesson
+                message="You must complete the previous lessons to view this one"
+                course={course}
+            />
         </div>
     );
 }
