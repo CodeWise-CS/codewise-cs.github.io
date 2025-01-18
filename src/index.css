@@ -31,6 +31,10 @@ select {
     background-color: var(--light-gray);
 }
 
+li {
+    padding-bottom: 10px;
+}
+
 .accent-text {
     color: var(--accent-color);
 }

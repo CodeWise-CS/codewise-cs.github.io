@@ -14,7 +14,6 @@ export default function Profile() {
     const { user } = useContext(UserContext);
     const { courses } = useContext(CourseContext);
     const [completedCourseCards, setCompletedCourseCards] = useState([]);
-    const [completedCareerPaths, setCompletedCareerPaths] = useState([]);
     const [editProfileVisible, setEditProfileVisible] = useState(false);
     const [newInfo, setNewInfo] = useState({
         displayName: auth.currentUser.displayName,
@@ -211,21 +210,16 @@ export default function Profile() {
                 </Button>
             </div>
             <div className="content">
-                {completedCourseCards.length > 0 && (
-                    <div>
-                        <h2 className="secondary-text bold section-header">
-                            Completed courses
-                        </h2>
-                        {completedCourseCards}
-                    </div>
-                )}
-                {completedCareerPaths.length > 0 && (
-                    <div>
-                        <h2 className="secondary-text bold section-header">
-                            Completed career paths
-                        </h2>
-                    </div>
-                )}
+                <div>
+                    <h2 className="secondary-text bold section-header">
+                        Completed courses
+                    </h2>
+                    {completedCourseCards.length > 0 ? (
+                        completedCourseCards
+                    ) : (
+                        <p>No completed courses yet</p>
+                    )}
+                </div>
             </div>
         </div>
     );

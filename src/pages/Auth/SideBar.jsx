@@ -32,6 +32,24 @@ function SideBar({ authType, onSignUp, switchAuth }) {
         }));
     }
 
+    async function handleAuthError(error) {
+        const errorMessages = {
+            'auth/email-already-in-use': 'This email already exists',
+            'auth/weak-password': 'Password must be 6+ characters',
+            'auth/invalid-email': 'Invalid email',
+            'auth/missing-email': 'Please enter an email',
+            'auth/missing-password': 'Please enter a password',
+            'auth/invalid-credential': 'Invalid email or password',
+        };
+        const errorMessage = errorMessages[error.code] || 'An error occurred';
+        console.error(error);
+        setFormErrors((oldFormErrors) => ({
+            ...oldFormErrors,
+            [error.code.includes('password') ? 'password' : 'email']:
+                errorMessage,
+        }));
+    }
+
     async function login(event) {
         event.preventDefault();
         try {
@@ -40,13 +58,9 @@ function SideBar({ authType, onSignUp, switchAuth }) {
                 formData.email,
                 formData.password
             );
-            const user = userCredentials.user;
             navigate('/');
         } catch (error) {
-            setFormErrors((oldFormErrors) => ({
-                ...oldFormErrors,
-                email: 'Account not found',
-            }));
+            handleAuthError(error);
         }
     }
 
@@ -58,41 +72,15 @@ function SideBar({ authType, onSignUp, switchAuth }) {
                 formData.email,
                 formData.password
             );
-            const user = userCredentials.user;
-            updateProfile(auth.currentUser, {
+            await updateProfile(auth.currentUser, {
                 displayName: `Unnamed User`,
             });
-            createUser(user.uid);
+            await createUser(userCredentials.user.uid);
             setFormErrors({ password: '', email: '' });
-            const contextUser = await getUserData(user.uid);
+            const contextUser = await getUserData(userCredentials.user.uid);
             onSignUp(contextUser);
         } catch (error) {
-            if (error.code == 'auth/email-already-in-use') {
-                setFormErrors((oldFormErrors) => ({
-                    ...oldFormErrors,
-                    email: 'This email already exists',
-                }));
-            } else if (error.code == 'auth/weak-password') {
-                setFormErrors((oldFormErrors) => ({
-                    ...oldFormErrors,
-                    password: 'Password must be 6+ characters',
-                }));
-            } else if (error.code == 'auth/invalid-email') {
-                setFormErrors((oldFormErrors) => ({
-                    ...oldFormErrors,
-                    email: 'Invalid email',
-                }));
-            } else if (error.code == 'auth/missing-email') {
-                setFormErrors((oldFormErrors) => ({
-                    ...oldFormErrors,
-                    email: 'Please enter an email',
-                }));
-            } else if (error.code == 'auth/missing-password') {
-                setFormErrors((oldFormErrors) => ({
-                    ...oldFormErrors,
-                    password: 'Please enter a password',
-                }));
-            }
+            handleAuthError(error);
         }
     }
 
@@ -131,7 +119,7 @@ function SideBar({ authType, onSignUp, switchAuth }) {
             </form>
             <p className="body-text switch-account-text">
                 {authType === 'login'
-                    ? "Don't have an accont?"
+                    ? "Don't have an account?"
                     : 'Already have an account?'}
                 <button
                     className="switch-auth accent-text bold interactable"

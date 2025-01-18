@@ -11,27 +11,6 @@ export default function Dashboard() {
     const { courses } = useContext(CourseContext);
     const [courseData, setCourseData] = useState([]);
     const [pathCards, setPathCards] = useState();
-    // if (user?.careerPaths) {
-    //     console.log('COURSES: ', courses);
-    //     const careerPaths = courses.careerPaths;
-
-    //     pathCards = Object.keys(user.careerPaths).map((pathName, i) => {
-    //         const title = careerPaths[pathName].title;
-    //         const courseList = careerPaths[pathName].courses;
-    //         const courseNames = courseList.map(
-    //             (course) => courses.courses.cardData[course].title
-    //         );
-
-    //         return (
-    //             <CareerPathCard
-    //                 key={i}
-    //                 title={title}
-    //                 pathName={pathName}
-    //                 courses={courseNames}
-    //             />
-    //         );
-    //     });
-    // }
 
     useEffect(() => {
         if (user?.careerPaths && courses?.careerPaths) {
@@ -82,29 +61,23 @@ export default function Dashboard() {
         }
     }, [user, courses]);
 
-    // name, length, description
-
     return (
         <div className="dashboard">
             <Header text="In progress" styles={{ marginBottom: '20px' }} />
-            {courseData ? (
+            {courseData?.length > 0 ? (
                 <CourseGrid cardData={courseData} />
             ) : (
-                <p className="body-text">
-                    Courses you have started will be listed here
-                </p>
+                <p className="body-text">No courses in progress</p>
             )}
             <Header
                 text="Saved career paths"
                 styles={{ margin: '40px 0 20px 0' }}
             />
             <div className="career-path-container">
-                {user?.careerPaths ? (
+                {user?.careerPaths?.length > 0 ? (
                     pathCards
                 ) : (
-                    <p className="body-text">
-                        Saved career paths will be listed here
-                    </p>
+                    <p className="body-text">No saved career paths</p>
                 )}
             </div>
         </div>

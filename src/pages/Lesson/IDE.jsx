@@ -58,6 +58,20 @@ function Editor({ width }) {
                     }}
                     onCancel={() => setAddModalVisible(false)}
                 >
+                    <p>Examples:</p>
+                    <ul>
+                        <li>
+                            To add a file in the root:
+                            <br />
+                            "home.html"
+                        </li>
+                        <li>
+                            To add a file in a new or existing folder (named
+                            "pages"):
+                            <br />
+                            "pages/home.html"
+                        </li>
+                    </ul>
                     <TextInput
                         placeholder="/folderName/fileName"
                         styles={{ marginTop: '20px' }}
