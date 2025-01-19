@@ -36,7 +36,7 @@
     margin: 8px;
 }
 
-.exercise .results {
+.exercise > .results {
     display: flex;
     flex-direction: column;
     justify-content: space-between;

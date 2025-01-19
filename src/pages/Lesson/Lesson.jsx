@@ -17,7 +17,9 @@ export default function Lesson({ lesson, handleEnd }) {
     const { courses } = useContext(CourseContext);
     const { user } = useContext(UserContext);
     const { course } = useParams();
-    const queryParameters = new URLSearchParams(window.location.search);
+    const queryParameters = new URLSearchParams(
+        window.location.hash.split('?')[1]
+    );
     const lessonNumber = queryParameters.get('lesson');
     const [selectedVideo, setSelectedVideo] = useState({});
     const [videoCards, setVideoCards] = useState(null);

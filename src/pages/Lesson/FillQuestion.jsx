@@ -6,7 +6,7 @@ export default function FillQuestion({ text, question, nextQuestion }) {
     const [inputs, setInputs] = useState({});
     const [correct, setCorrect] = useState(null);
     let correctInputs = {};
-    const [parsedContent, setParsedContent] = useState(parseString(text));
+    const parsedContent = parseString(text);
 
     function parseString(str) {
         const parts = str.split(/(<@>.*?<@>)/g);
@@ -21,7 +21,8 @@ export default function FillQuestion({ text, question, nextQuestion }) {
                         <Input
                             index={index}
                             handleChange={handleChange}
-                            value=""
+                            values={inputs}
+                            key={index}
                         />
                         <br />
                     </React.Fragment>
@@ -29,8 +30,8 @@ export default function FillQuestion({ text, question, nextQuestion }) {
                     <Input
                         index={index}
                         handleChange={handleChange}
+                        values={inputs}
                         key={index}
-                        value=""
                     />
                 );
             }
@@ -70,6 +71,7 @@ export default function FillQuestion({ text, question, nextQuestion }) {
         const wasCorrect = correct;
         setCorrect(null);
         setInputs({});
+        console.log(wasCorrect);
         nextQuestion(wasCorrect);
     }
 
@@ -107,26 +109,30 @@ export default function FillQuestion({ text, question, nextQuestion }) {
     );
 }
 
-function Input({ index, handleChange }) {
-    const [value, setValue] = useState('');
+function Input({ index, values, handleChange }) {
     const inputRef = useRef(null);
     const spanRef = useRef(null);
+
+    console.log('Index: ', index, 'Value: ', values[index]);
 
     useEffect(() => {
         const span = spanRef.current;
         const input = inputRef.current;
-        span.textContent = value;
+        span.textContent = values[index];
         input.style.width = `${span.offsetWidth}px`;
-    }, [value]);
+    }, [values[index]]);
 
     return (
         <>
-            <span ref={spanRef} className="hidden-span"></span>
+            <span
+                ref={spanRef}
+                className="hidden-span"
+                aria-hidden="true"
+            ></span>
             <input
                 ref={inputRef}
-                value={value}
+                value={values[index] !== undefined ? values[index] : ''}
                 onChange={(e) => {
-                    setValue(e.target.value);
                     handleChange(index, e.target.value);
                 }}
                 className="dynamic-input"

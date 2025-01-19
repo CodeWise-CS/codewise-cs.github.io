@@ -5,21 +5,27 @@
     width: calc(100% - 20px);
 }
 
-.input-container .results {
+.input-container > .results {
     z-index: 999;
     min-width: 210px;
     background-color: var(--secondary-color);
     width: calc(30% - 45px);
     padding: 14px;
     border-radius: 0 0 20px 20px;
-    gap: 8px;
+    gap: 10px;
     display: flex;
     flex-direction: column;
     position: absolute;
 }
 
-.input-container .results.hidden {
+.input-container > .results.hidden {
     display: none;
+}
+
+.input-container > .results > .result {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .input-container a {
@@ -31,12 +37,6 @@
 .input-container a:hover {
     color: var(--accent-color);
     text-decoration: none;
-}
-
-.input-container .result {
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 .input-container .course-logo {

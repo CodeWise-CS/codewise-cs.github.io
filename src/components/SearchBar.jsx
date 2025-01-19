@@ -39,7 +39,7 @@ export default function SearchBar() {
                 filteredCourses.map((name, i) => (
                     <a
                         className="result"
-                        href={`/course-overview/${name}`}
+                        href={`/#/course-overview/${name}`}
                         key={i}
                     >
                         <img

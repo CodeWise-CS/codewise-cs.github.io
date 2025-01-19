@@ -12,8 +12,13 @@ import UnautharizedLesson from './UnautharizedLesson';
 export default function Exercise({ lesson, handleEnd }) {
     const { course } = useParams();
     const { user } = useContext(UserContext);
-    const queryParameters = new URLSearchParams(window.location.search);
+    const queryParameters = new URLSearchParams(
+        window.location.hash.split('?')[1]
+    );
     const lessonNumber = queryParameters.get('lesson');
+
+    // const queryParameters = new URLSearchParams(window.location.search);
+    // const lessonNumber = queryParameters.get('lesson');
     const [hasPermission, setHasPermission] = useState(true);
     const [questionNumber, setQuestionNumber] = useState(0);
     const length = lesson.questions.length;
@@ -38,6 +43,11 @@ export default function Exercise({ lesson, handleEnd }) {
 
     useEffect(() => {
         if (user) {
+            console.log(
+                'Current lesson, lessonNumber | ',
+                user.coursesInProgress[course].currentLesson,
+                lessonNumber
+            );
             if (user.coursesInProgress[course].currentLesson != lessonNumber) {
                 console.log('No permission');
                 setHasPermission(false);
