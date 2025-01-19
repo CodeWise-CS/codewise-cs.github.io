@@ -5,108 +5,81 @@ import './styles/PathGrid.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function PathGrid({ course, courseName }) {
-    const [courses, setCourses] = useState(course);
-    const [loading, setLoading] = useState(true);
+    const [rows, setRows] = useState([]);
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
-    let rows = null;
-
-    const completedLessons = user.coursesInProgress?.courseNames.includes(
-        courseName
-    )
-        ? user.coursesInProgress[courseName].currentLesson
-        : null;
-
-    let elements = null;
 
     useEffect(() => {
-        setLoading(false);
-    }, []);
+        const validLessons = course.filter((item) => item.type !== 'exercise');
 
-    if (!loading) {
-        const filteredCourses = courses.filter(
-            (item) => item.type !== 'exercise'
+        const completedLessons = user.coursesInProgress?.courseNames.includes(
+            courseName
+        )
+            ? user.coursesInProgress[courseName].currentLesson
+            : 0;
+
+        const lessonElements = validLessons.map((item, index) =>
+            createLessonElement(item, index, completedLessons)
         );
-        elements = filteredCourses.map((item, index) => {
-            const completed = index + 1 <= Math.floor(completedLessons / 2);
-            let progress = completedLessons % 2 === 0 ? 100 : 50;
-            let started = !completed;
 
-            if (index === Math.floor(completedLessons / 2)) {
-                started = false;
-                progress = completedLessons % 2 === 0 ? 0 : 50;
-            }
+        const chunkedElements = chunkArray(lessonElements, 3);
 
-            if (completed) {
-                progress = null;
-            }
-            if (started) {
-                progress = 0;
-            }
+        const formattedRows = chunkedElements.map((item, index) => (
+            <React.Fragment key={index}>
+                {index !== 0 && (
+                    <div
+                        className={index % 2 ? 'right-line' : 'left-line'}
+                    ></div>
+                )}
+                <div className={`row ${index % 2 ? 'reverse' : ''}`}>
+                    {item}
+                </div>
+            </React.Fragment>
+        ));
 
-            return index % 3 ? (
-                <React.Fragment key={index}>
-                    <div className="horizontal-line"></div>
-                    <LessonCard
-                        onClick={() =>
-                            navigate(
-                                `/lesson/${courseName}?lesson=${
-                                    index * 2 + (progress === 50 ? 1 : 0)
-                                }`
-                            )
-                        }
-                        lessonName={item.lessonName}
-                        completed={completed}
-                        progress={progress}
-                    />
-                </React.Fragment>
-            ) : (
-                // Fix styling
-                <React.Fragment key={index}>
-                    {/* {row !== 0 && (
-            <div className={row % 2 ? "right-line" : "left-line"}></div>
-          )} */}
-                    <LessonCard
-                        onClick={() =>
-                            navigate(
-                                `/lesson/${courseName}?lesson=${
-                                    index * 2 + (progress === 50 ? 1 : 0)
-                                }`
-                            )
-                        }
-                        lessonName={item.lessonName}
-                        completed={completed}
-                        progress={progress}
-                    />
-                </React.Fragment>
-            );
-        });
+        setRows(formattedRows);
+    }, [course, courseName, user]);
 
-        const chunkedElements = chunkArray(elements, 3);
-        rows = chunkedElements.map((item, index) => {
-            return (
-                <React.Fragment key={index}>
-                    {index !== 0 && (
-                        <div
-                            className={index % 2 ? 'right-line' : 'left-line'}
-                        ></div>
-                    )}
-                    <div className={`row ${index % 2 ? 'reverse' : ''}`}>
-                        {...item}
-                    </div>
-                </React.Fragment>
-            );
-        });
-    }
-    function chunkArray(array, size) {
-        const result = [];
-        for (let i = 0; i < array.length; i += size) {
-            const chunk = array.slice(i, i + size);
-            result.push(chunk);
+    function createLessonElement(item, index, completedLessons) {
+        const isCompleted = index + 1 <= Math.floor(completedLessons / 2);
+        let progress = completedLessons % 2 === 0 ? 100 : 50;
+        let isStarted = !isCompleted;
+
+        if (index === Math.floor(completedLessons / 2)) {
+            isStarted = false;
+            progress = completedLessons % 2 === 0 ? 0 : 50;
         }
 
-        return result;
+        if (isCompleted) progress = null;
+        if (isStarted) progress = 0;
+
+        return (
+            <React.Fragment key={index}>
+                {index % 3 !== 0 && <div className="horizontal-line"></div>}
+                <LessonCard
+                    onClick={() =>
+                        navigate(
+                            `/lesson/${courseName}?lesson=${
+                                index * 2 + (progress === 50 ? 1 : 0)
+                            }`
+                        )
+                    }
+                    lessonName={item.lessonName}
+                    completed={isCompleted}
+                    progress={progress}
+                />
+            </React.Fragment>
+        );
     }
 
-    return <div className="path-grid">{rows !== null && rows}</div>;
+    /**
+     * Splits an array into chunks of a given size.
+     */
+    function chunkArray(array, size) {
+        return Array.from({ length: Math.ceil(array.length / size) }, (_, i) =>
+            array.slice(i * size, i * size + size)
+        );
+    }
+
+    return <div className="path-grid">{rows}</div>;
 }

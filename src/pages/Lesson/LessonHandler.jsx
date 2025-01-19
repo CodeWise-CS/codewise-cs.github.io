@@ -22,6 +22,16 @@ export default function LessonHandler() {
     const [lesson, setLesson] = useState(null);
     const navigate = useNavigate();
 
+    function checkCompletion() {
+        if (
+            user?.completedCourses &&
+            user.completedCourses.find((_course) => _course.name === course) &&
+            courses
+        ) {
+            navigate(`/completed/${course}`);
+        }
+    }
+
     function handleFinishedCourse(questionCount, correctCount) {
         let finalAccuracy =
             ((user.coursesInProgress[course].correctAnswers + correctCount) /
@@ -80,6 +90,10 @@ export default function LessonHandler() {
             setLessonNumber(Number(lessonNumber) + 1);
         }
     }
+
+    checkCompletion();
+
+    useEffect(() => checkCompletion(), []);
 
     useEffect(() => {
         if (courses) {

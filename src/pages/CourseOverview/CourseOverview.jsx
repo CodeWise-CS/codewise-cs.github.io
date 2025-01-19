@@ -23,7 +23,7 @@ export default function CourseOverview() {
         }
     }
 
-    useEffect(() => {
+    function checkCompletion() {
         if (
             user?.completedCourses &&
             user.completedCourses.find((_course) => _course.name === course) &&
@@ -31,7 +31,13 @@ export default function CourseOverview() {
         ) {
             navigate(`/completed/${course}`);
         }
-    }, [user, courses]);
+    }
+
+    checkCompletion();
+
+    useEffect(() => {
+        checkCompletion();
+    }, []); //[user, courses]);
 
     return (
         <div className="course-overview">
