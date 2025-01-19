@@ -21,9 +21,6 @@ export default function App() {
     const { setCourses } = useContext(CourseContext);
 
     useEffect(() => {
-        // Effect runs twice due to strict mode
-        // Remove strict mode to reduce Firebase requests
-
         getDownloadURL(sRef(storage, 'codewise-courses.json'))
             .then((url) => fetch(url))
             .then((response) => response.json())
