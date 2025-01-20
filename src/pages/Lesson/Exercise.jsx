@@ -43,19 +43,11 @@ export default function Exercise({ lesson, handleEnd }) {
 
     useEffect(() => {
         if (user) {
-            console.log(
-                'Current lesson, lessonNumber | ',
-                user.coursesInProgress[course].currentLesson,
-                lessonNumber
-            );
             if (user.coursesInProgress[course].currentLesson != lessonNumber) {
-                console.log('No permission');
                 setHasPermission(false);
             }
         }
     }, [user]);
-
-    console.log('Has permission', hasPermission);
 
     return hasPermission ? (
         <div className="exercise">

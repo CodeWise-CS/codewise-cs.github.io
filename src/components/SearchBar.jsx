@@ -11,7 +11,6 @@ export default function SearchBar() {
 
     useEffect(() => {
         const handleClick = (event) => {
-            console.log(event.target.className);
             if (
                 event.target.className !== 'result' &&
                 event.target.className !== 'search-bar'
@@ -33,7 +32,6 @@ export default function SearchBar() {
         } else if (courses) {
             const courseNames = courses.courses.courseNames;
             const filteredCourses = filter(courseNames, search);
-            console.log('Filtered courses: ', filteredCourses);
 
             setCourseCards(
                 filteredCourses.map((name, i) => (

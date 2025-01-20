@@ -3,7 +3,6 @@ import CourseCard from './CourseCard';
 import './styles/CourseGrid.css';
 
 export default function CourseGrid({ cardData }) {
-    console.log('Card data 2: ', cardData);
     const cards = cardData.map((item) => {
         return (
             <CourseCard

@@ -23,8 +23,6 @@ function Editor({ width }) {
         ''
     );
 
-    useEffect(() => console.log(sandpack.files), [sandpack.files]);
-
     return (
         <>
             {removeModalVisible && (
@@ -156,20 +154,6 @@ function Editor({ width }) {
 
 export default function IDE({ languageID }) {
     const [width, setWidth] = useState(window.innerWidth);
-    //     const [reactFiles, setReactFiles] = useState({
-    //         '/styles.css': {
-    //             code: ``,
-    //         },
-    //         '/App.js': {
-    //             code: `import "./styles.css"
-
-    // export default function App() {
-    //     return <h1>Hello World!</h1>
-    // }`,
-    //         },
-    //     });
-
-    // useEffect(() => console.log(reactFiles), [reactFiles]);
 
     const templates = {
         react: 'react',

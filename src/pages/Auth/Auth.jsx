@@ -13,7 +13,6 @@ export default function Auth() {
     const navigate = useNavigate();
 
     function handleSignUp(_user) {
-        console.log('HANDLED SIGN UP: ', user);
         setSignedUp(true);
         setUser(_user);
     }

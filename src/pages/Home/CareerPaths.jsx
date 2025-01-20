@@ -12,7 +12,6 @@ export default function CareerPaths() {
     const pathCards = Object.keys(careerPaths).map((pathName, i) => {
         const title = careerPaths[pathName].title;
         const courseList = careerPaths[pathName].courses;
-        // console.log(courseList);
         const courseNames = courseList.map(
             (course) => courses.courses.cardData[course].title
         );

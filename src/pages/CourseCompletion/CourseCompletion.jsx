@@ -14,7 +14,6 @@ export default function CourseCompletion() {
     const { user } = useContext(UserContext);
     const { courses } = useContext(CourseContext);
     const [accuracy, setAccuracy] = useState(0);
-    console.log(courses);
 
     useEffect(() => {
         if (courses && user) {

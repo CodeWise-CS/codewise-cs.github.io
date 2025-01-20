@@ -43,8 +43,6 @@ export default function ExploreCourses() {
         }
     }, [filteredCourses]);
 
-    useEffect(() => console.log(cardData), [cardData]);
-
     return (
         <div className="explore-courses">
             <Header text="Explore courses" styles={{ marginBottom: '20px' }} />

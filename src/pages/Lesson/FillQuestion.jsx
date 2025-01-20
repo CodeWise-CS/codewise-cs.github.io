@@ -71,7 +71,6 @@ export default function FillQuestion({ text, question, nextQuestion }) {
         const wasCorrect = correct;
         setCorrect(null);
         setInputs({});
-        console.log(wasCorrect);
         nextQuestion(wasCorrect);
     }
 
@@ -112,8 +111,6 @@ export default function FillQuestion({ text, question, nextQuestion }) {
 function Input({ index, values, handleChange }) {
     const inputRef = useRef(null);
     const spanRef = useRef(null);
-
-    console.log('Index: ', index, 'Value: ', values[index]);
 
     useEffect(() => {
         const span = spanRef.current;

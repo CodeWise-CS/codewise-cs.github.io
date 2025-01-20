@@ -24,7 +24,6 @@ export function logOut() {
 }
 
 export function createUser(uid) {
-    console.log('CREATE USER: ', uid);
     const data = {
         completedLessons: [],
         careerPaths: [],
@@ -37,7 +36,7 @@ export function createUser(uid) {
             console.log('Set values');
         })
         .catch((error) => {
-            console.log(error);
+            console.error(error);
         });
 }
 
@@ -49,10 +48,8 @@ export function getUserData(uid) {
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     let data = snapshot.val();
-                    console.log('Accessed user data from Firebase: ', data);
                     resolve(data);
                 } else {
-                    console.log('Data not available');
                     resolve(null);
                 }
             })

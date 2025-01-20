@@ -99,12 +99,6 @@ export default function LessonHandler() {
         if (courses) {
             if (courses.courses.courseNames.includes(course)) {
                 setLesson(courses.courses[course][lessonNumber]);
-                console.log(
-                    'Loading lesson: ',
-                    course,
-                    lessonNumber,
-                    courses.courses[course][lessonNumber]
-                );
             }
         }
     }, [courses, lessonNumber]);
