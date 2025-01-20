@@ -6,7 +6,7 @@ import { UserContext } from '../../context/UserContext';
 import Button from '../../components/Button';
 import { CourseContext } from '../../context/CourseContext';
 import CourseCard from '../../components/CourseCard';
-import editIcon from '../../assets/pencil.svg';
+import editIcon from '/pencil.svg';
 import Popup from '../../components/Popup';
 import TextInput from '../../components/TextInput';
 

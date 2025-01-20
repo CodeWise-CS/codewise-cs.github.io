@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './styles/Accordion.css';
-import chevronIcon from '../assets/chevron.svg';
+import chevronIcon from '/chevron.svg';
 
 export default function Accordion({ data }) {
     const [activeIndicies, setActiveIndicies] = useState([]);

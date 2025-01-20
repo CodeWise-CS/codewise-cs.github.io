@@ -55,10 +55,7 @@ export default function CareerPathCard({ pathName, title, courses, saved }) {
 function SaveButton({ saved, onClick }) {
     return (
         <button className="interactable save-button" onClick={onClick}>
-            <img
-                src={`src/assets/star-${saved ? 'fill' : 'outline'}.svg`}
-                alt=""
-            />
+            <img src={`/star-${saved ? 'fill' : 'outline'}.svg`} alt="" />
         </button>
     );
 }

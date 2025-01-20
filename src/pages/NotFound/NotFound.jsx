@@ -13,7 +13,7 @@ export default function NotFound() {
             <img
                 draggable="false"
                 className="not-found-image"
-                src="src/assets/404 Error.svg"
+                src="/404 Error.svg"
                 alt="Page not found! 404"
             />
             <h1 className="error-text">Looks like you're lost...</h1>

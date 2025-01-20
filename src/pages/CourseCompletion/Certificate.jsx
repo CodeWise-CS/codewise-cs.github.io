@@ -1,6 +1,6 @@
 import './styles/Certificate.css';
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import codewiseLogo from '../../assets/codewise-logo.svg';
+import codewiseLogo from '/codewise-logo.svg';
 import { CourseContext } from '../../context/CourseContext';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';

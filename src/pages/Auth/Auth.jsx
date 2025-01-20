@@ -43,28 +43,28 @@ export default function Auth() {
             <div className="branding">
                 <img
                     className="logo"
-                    src="src/assets/codewise-logo.svg"
+                    src="/codewise-logo.svg"
                     alt="CodeWise logo"
                 />
                 <div className="info-container">
                     <h1>Beginner to Advanced</h1>
                     <div className="grid">
                         <div className="grid-item">
-                            <img src="src/assets/free-icon.svg" />
+                            <img src="/free-icon.svg" />
                             <p>
                                 Access every course and resource for{' '}
                                 <span className="bold">free</span>
                             </p>
                         </div>
                         <div className="grid-item">
-                            <img src="src/assets/tools-icon.svg" />
+                            <img src="/tools-icon.svg" />
                             <p>
                                 Learn with videos, quizzes, code compilation,
                                 and exercises
                             </p>
                         </div>
                         <div className="grid-item">
-                            <img src="src/assets/certificate-icon.svg" />
+                            <img src="/certificate-icon.svg" />
                             <p>
                                 Earn{' '}
                                 <span className="bold">
@@ -74,7 +74,7 @@ export default function Auth() {
                             </p>
                         </div>
                         <div className="grid-item">
-                            <img src="src/assets/path-icon.svg" />
+                            <img src="/path-icon.svg" />
                             <p>
                                 Prepare yourself for a job by following{' '}
                                 <span className="bold">career paths</span>

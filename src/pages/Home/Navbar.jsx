@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { logOut } from '../../firebase';
 import NavButton from '../../components/NavButton';
 import Button from '../../components/Button';
-import menuIcon from '../../assets/menu.svg';
+import menuIcon from '/menu.svg';
 import './styles/Navbar.css';
 
 export default function Navbar({ changePage, page }) {
@@ -17,7 +17,7 @@ export default function Navbar({ changePage, page }) {
             <div className="hamburger-container">
                 <img
                     className="logo"
-                    src="src/assets/codewise-logo.svg"
+                    src="/codewise-logo.svg"
                     alt="CodeWise logo"
                 />
                 <button

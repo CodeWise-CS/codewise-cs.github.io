@@ -20,7 +20,7 @@
 }
 
 .auth .logo {
-    background: url('src/assets/codewise-logo.svg');
+    background: url('/codewise-logo.svg');
     width: 200px;
     aspect-ratio: 4.5;
 }
@@ -64,7 +64,7 @@
 .auth .graphic-container {
     flex: 1;
     width: 100%;
-    background-image: url('src/assets/Login graphic.svg');
+    background-image: url('/Login graphic.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
