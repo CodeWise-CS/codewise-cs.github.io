@@ -25,7 +25,7 @@ body:
     id: reason
     attributes:
       label: "💡 Why is this feature important?"
-      description: "Describe the reasoning behind this feature and how they improve the platform."
+      description: "Describe the reasoning behind this feature and how they improve the platform. Feel free to add images, designs, or diagrams to make approval easier and faster."
       placeholder: "Example: This removes the need to go back to the dashboard and search in the Explore Courses tab. It would improve user experience and make navigation much faster and easier."
     validations:
       required: true
