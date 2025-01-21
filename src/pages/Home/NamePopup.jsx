@@ -15,9 +15,6 @@ export default function NamePopup({ onSubmit }) {
         username: '',
     });
 
-    // TODO: Limit the length of the bio, username, and display name
-    // TODO: Fundamental problem of users changing profile information to download course certificates for friends
-
     function handleChange(event) {
         const { name, value } = event.target;
         setFormData((oldFormData) => ({

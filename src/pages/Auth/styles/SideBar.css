@@ -83,3 +83,12 @@
         margin: 20px;
     }
 }
+
+@media (max-width: 750px) {
+    .side-bar {
+        width: 100%;
+        border-radius: 40px 40px 0px 0px;
+        height: fit-content;
+        padding-bottom: 40px;
+    }
+}

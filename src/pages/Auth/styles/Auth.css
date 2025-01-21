@@ -76,12 +76,18 @@
     }
 }
 
-@media (max-width: 590px) {
+/* @media (max-width: 590px) {
     .auth .grid {
         padding: 20px 0px;
         gap: 0px;
         grid-template-columns: auto;
         overflow-y: scroll;
         max-height: 100%;
+    }
+} */
+
+@media (max-width: 750px) {
+    .auth {
+        flex-direction: column;
     }
 }

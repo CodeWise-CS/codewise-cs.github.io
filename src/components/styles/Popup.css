@@ -15,8 +15,8 @@
     padding: 20px;
     position: fixed;
     z-index: 99;
-    top: calc(50% - var(--height) / 2);
-    left: calc(50% - var(--width) / 2);
+    top: calc(50% - var(--height) / 2 - 20px);
+    left: calc(50% - var(--width) / 2 - 20px);
     height: fit-content;
     max-height: var(--height);
     width: var(--width);
