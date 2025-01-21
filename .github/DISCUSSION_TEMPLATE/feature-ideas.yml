@@ -1,0 +1,41 @@
+
+title: "[Feature Idea] feature_name"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 💡Feature Idea Discussion
+        This discussion is for proposing new feature ideas to CodeWise. A moderator will review your request and provide feedback before you can create an issue.
+
+        **Follow these guidelines when submitting your proposal:**
+        - Use a clear and descriptive title: `[Feature Idea] feature_name` (e.g., `[Feature Idea] Course search bar`).
+        - Provide a detailed explanation of the requested feature.
+        - Explain why these changes are necessary and how they improve the platform.
+
+  - type: textarea
+    id: change-description
+    attributes:
+      label: "📝 Describe the requested changes"
+      description: "Clearly explain the requested feature and what it would consist of."
+      placeholder: "Example: The search bar would be located on the current navigation bar. Users would be able to type the course they are searching for and matching results would be listed with the course name and icon. Clicking on the results would send them to the course's overview page."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: "💡 Why is this feature important?"
+      description: "Describe the reasoning behind this feature and how they improve the platform. Feel free to add images, designs, or diagrams to make approval easier and faster."
+      placeholder: "Example: This removes the need to go back to the dashboard and search in the Explore Courses tab. It would improve user experience and make navigation much faster and easier."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: "✅ Confirmation"
+      options:
+        - label: "I have checked that this change is not already discussed in an open issue or PR."
+          required: true
+        - label: "I understand that this discussion must be approved before I can create an issue."
+          required: true

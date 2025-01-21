@@ -11,16 +11,17 @@ Once users create an account, they can explore our courses and career paths.
 
 ## 🚀 **Getting Started**
 
-1. **Clone the repository**
+1. **Fork the repository**
+2. **Clone the repository**
     ```bash
-    git clone https://github.com/CodeWise-CS/codewise-cs.github.io.git
+    git clone https://github.com/YOUR-USERNAME/codewise-cs.github.io.git
     cd codewise-cs.github.io
     ```
-2. **Installing dependencies**
+3. **Installing dependencies**
     ```bash
     npm i
     ```
-3. **Running locally**
+4. **Running locally**
     ```bash
     npm run dev
     ```
