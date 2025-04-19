@@ -1,0 +1,11 @@
+.toggle-text {
+    text-align: start;
+    padding-bottom: 20px;
+}
+
+.toggle-text .text.code {
+    font-family: monospace;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: lightgray;
+}

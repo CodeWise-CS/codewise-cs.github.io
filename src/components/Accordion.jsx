@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './styles/Accordion.css';
 import chevronIcon from '/chevron.svg';
+import ToggleText from './ToggleText';
 
 export default function Accordion({ data }) {
     const [activeIndicies, setActiveIndicies] = useState([]);
@@ -15,7 +16,7 @@ export default function Accordion({ data }) {
 
     return (
         <div className="accordion">
-            {data.map(({ title, content }, i) => (
+            {data.map(({ title, content, solution }, i) => (
                 <button
                     key={title}
                     className="accordion-item"
@@ -38,6 +39,18 @@ export default function Accordion({ data }) {
                     >
                         {content}
                     </p>
+                    <div
+                        className={`accordion-content ${
+                            activeIndicies.includes(i) && 'active'
+                        }`}
+                    >
+                        <ToggleText
+                            text={solution}
+                            textClass="code"
+                            showText="Show solution"
+                            hideText="Hide solution"
+                        />
+                    </div>
                 </button>
             ))}
         </div>
