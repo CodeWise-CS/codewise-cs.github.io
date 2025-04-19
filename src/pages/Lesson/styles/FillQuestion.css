@@ -8,6 +8,7 @@
 
 .fill-question .code-text {
     color: var(--white-color);
+    white-space: pre-line;
 }
 
 .fill-question .input-field {
