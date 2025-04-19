@@ -9,24 +9,12 @@ export default function FillQuestion({ text, question, nextQuestion }) {
     const parsedContent = parseString(text);
 
     function parseString(str) {
-        const parts = str.split(/(<@>.*?<@>)/g);
+        const parts = str.split('<@>');
         return parts.map((part, index) => {
-            if (part.startsWith('<@>') && part.endsWith('<@>')) {
-                const word = part.slice(3, -3);
+            if (index % 2 == 1) {
+                correctInputs[index] = part;
 
-                correctInputs[index] = word;
-
-                return word.includes('\n') ? (
-                    <React.Fragment key={index}>
-                        <Input
-                            index={index}
-                            handleChange={handleChange}
-                            values={inputs}
-                            key={index}
-                        />
-                        <br />
-                    </React.Fragment>
-                ) : (
+                return (
                     <Input
                         index={index}
                         handleChange={handleChange}
@@ -35,13 +23,7 @@ export default function FillQuestion({ text, question, nextQuestion }) {
                     />
                 );
             }
-            return part.includes('\n') ? (
-                <React.Fragment key={index}>
-                    <span className="code-text">{part.split('\n')[0]}</span>
-                    <br />
-                    <span className="code-text">{part.split('\n')[1]}</span>
-                </React.Fragment>
-            ) : (
+            return (
                 <span className="code-text" key={index}>
                     {part}
                 </span>
