@@ -3,16 +3,16 @@ import './styles/Profile.css';
 import { auth, setUserData } from '../../firebase';
 import { updateProfile } from 'firebase/auth';
 import { UserContext } from '../../context/UserContext';
-import Button from '../../components/Button';
-import { CourseContext } from '../../context/CourseContext';
 import CourseCard from '../../components/CourseCard';
+import Button from '../../components/Button';
+import { useFetchWithCache } from '../../hooks/useFetchWithCache';
 import editIcon from '/pencil.svg';
 import Popup from '../../components/Popup';
 import TextInput from '../../components/TextInput';
 
 export default function Profile() {
     const { user } = useContext(UserContext);
-    const { courses } = useContext(CourseContext);
+    const { fetchDataWithCache } = useFetchWithCache();
     const [completedCourseCards, setCompletedCourseCards] = useState([]);
     const [editProfileVisible, setEditProfileVisible] = useState(false);
     const [newInfo, setNewInfo] = useState({
@@ -105,14 +105,32 @@ export default function Profile() {
     }
 
     useEffect(() => {
-        if (user?.completedCourses && courses) {
-            setCompletedCourseCards(
-                user.completedCourses.map((course) => (
-                    <CourseCard courseName={course.name} />
-                ))
-            );
+        if (user?.completedCourses) {
+            (async () => {
+                const courses = await fetchDataWithCache('courses');
+                const completedCourses = user.completedCourses.map(
+                    (completedCourse) => completedCourse.name
+                );
+
+                setCompletedCourseCards(
+                    courses
+                        .filter((course) =>
+                            completedCourses.includes(course.id)
+                        )
+                        .map((item) => (
+                            <CourseCard
+                                key={item.id}
+                                courseName={item.id}
+                                title={item.title}
+                                length={item.length}
+                                imageURL={item.imageURL}
+                                color={item.color}
+                            />
+                        ))
+                );
+            })();
         }
-    }, [user, courses]);
+    }, [user]);
 
     return (
         <div className="profile">

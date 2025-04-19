@@ -1,7 +1,6 @@
 import './styles/Certificate.css';
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import codewiseLogo from '/codewise-logo.svg';
-import { CourseContext } from '../../context/CourseContext';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import Loader from '../../components/Loader';
@@ -10,10 +9,9 @@ export default function Certificate({
     fullName,
     username,
     accuracy,
-    course,
+    imageURL,
     courseDisplayName,
 }) {
-    const { courses } = useContext(CourseContext);
     const certificateRef = useRef(null);
     const [containerWidth, setContainerWidth] = useState(0);
     const [isDownloading, setIsDownloading] = useState(false);
@@ -132,13 +130,11 @@ export default function Certificate({
                         <br />
                         Username
                     </p>
-                    {courses?.courses[course] && (
-                        <img
-                            src={courses.courses.cardData[course].imageURL}
-                            alt={`${courseDisplayName} logo`}
-                            className="course-logo"
-                        />
-                    )}
+                    <img
+                        src={imageURL}
+                        alt={`${courseDisplayName} logo`}
+                        className="course-logo"
+                    />
                     <p
                         className="body-text"
                         style={{ fontSize: `${containerWidth / 50}px` }}

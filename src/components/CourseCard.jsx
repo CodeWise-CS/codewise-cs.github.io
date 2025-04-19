@@ -3,43 +3,47 @@ import ProgressBar from './ProgressBar';
 import './styles/CourseCard.css';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
-import { CourseContext } from '../context/CourseContext';
+import { useFetchWithCache } from '../hooks/useFetchWithCache';
 
-export default function CourseCard({ courseName }) {
+// Display 100% progress when course completed
+
+export default function CourseCard({
+    courseName,
+    title,
+    length,
+    imageURL,
+    color,
+}) {
     const navigate = useNavigate();
-    const { courses } = useContext(CourseContext);
+    const { fetchDataWithCache } = useFetchWithCache();
     const { user } = useContext(UserContext);
-    const [cardData, setCardData] = useState(null);
-    const [length, setLength] = useState(1);
     const [progress, setProgress] = useState(0);
     const [lessonTitle, setLessonTitle] = useState('loading...');
 
     useEffect(() => {
-        if (user && courses) {
-            const tempProgress = user.coursesInProgress?.courseNames.includes(
-                courseName
-            )
-                ? user.coursesInProgress[courseName].currentLesson
-                : user.completedCourses?.find(
-                      (course) => course.name === courseName
-                  )
-                ? courses.courses[courseName].length
-                : 0;
-            setLength(courses.courses[courseName].length);
-            setProgress(tempProgress);
-            setLessonTitle(
-                courses.courses[courseName][tempProgress]
-                    ? courses.courses[courseName][tempProgress].lessonName
-                    : undefined
-            );
-        }
-    }, [courses, user]);
+        (async () => {
+            if (user) {
+                const progress = user.coursesInProgress
+                    ? user.coursesInProgress[courseName].currentLesson
+                    : 0;
 
-    useEffect(() => {
-        if (courses) {
-            setCardData(courses.courses.cardData[courseName]);
-        }
-    }, [courses]);
+                if (
+                    !user?.completedCourses
+                        ?.map((item) => item.name)
+                        .includes(courseName)
+                ) {
+                    setProgress(progress);
+                    const lesson = await fetchDataWithCache(
+                        `courses/${courseName}/lessons`,
+                        [`lesson${progress + 1}`]
+                    );
+                    setLessonTitle(lesson.name);
+                } else {
+                    setLessonTitle(null);
+                }
+            }
+        })();
+    }, [user]);
 
     return (
         <button
@@ -49,19 +53,15 @@ export default function CourseCard({ courseName }) {
                 navigate(`/course-overview/${courseName}`);
             }}
         >
-            {cardData !== null && (
-                <div
-                    style={{ backgroundColor: cardData.color }}
-                    className="course-header"
-                >
-                    <p className="course-title">{cardData.title}</p>
-                    <img
-                        className="course-logo"
-                        src={cardData.imageURL}
-                        alt={courseName + ' logo'}
-                    />
-                </div>
-            )}
+            <div style={{ backgroundColor: color }} className="course-header">
+                <p className="course-title">{title}</p>
+                <img
+                    className="course-logo"
+                    src={imageURL}
+                    alt={courseName + ' logo'}
+                />
+            </div>
+
             <div className="info-section">
                 {lessonTitle ? (
                     <p className="secondary-text current-lesson">
@@ -73,7 +73,15 @@ export default function CourseCard({ courseName }) {
                         <span className="bold">Course completed</span>
                     </p>
                 )}
-                <ProgressBar progress={Math.round((progress / length) * 100)} />
+                <ProgressBar
+                    progress={
+                        user?.completedCourses
+                            ?.map((item) => item.name)
+                            .includes(courseName)
+                            ? 100
+                            : Math.round((progress / length) * 100)
+                    }
+                />
             </div>
         </button>
     );

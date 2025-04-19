@@ -1,42 +1,53 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import TopNavbar from '../../components/TopNavbar';
-import capitalize from '../../utils/capitalize';
 import { useParams } from 'react-router-dom';
-import { CourseContext } from '../../context/CourseContext';
 import './styles/CareerPathOverview.css';
 import { UserContext } from '../../context/UserContext';
 import CourseList from './CourseList';
 import CourseCard from '../../components/CourseCard';
+import { useFetchWithCache } from '../../hooks/useFetchWithCache';
 
 export default function CareerPathOverview() {
+    const { fetchDataWithCache } = useFetchWithCache();
     const { careerPath } = useParams();
-    const { courses } = useContext(CourseContext);
     const { user } = useContext(UserContext);
-    let courseCards = null;
-    let currentPath = null;
-    let found = true;
+    const [courseCards, setCourseCards] = useState(null);
+    const [title, setTitle] = useState('Loading...');
+    let [found, setFound] = useState(true);
 
-    if (courses) {
-        if (Object.keys(courses.careerPaths).includes(careerPath)) {
-            currentPath = courses.careerPaths[careerPath];
-            courseCards = currentPath.courses.map((courseName) => {
-                return <CourseCard courseName={courseName} />;
-            });
-        } else {
-            found = false;
-        }
-    }
+    useEffect(() => {
+        (async () => {
+            const data = await fetchDataWithCache('career-paths', [careerPath]);
+            if (!data) {
+                setFound(false);
+                return;
+            }
+            setTitle(data.title);
+            const courseNames = data.courses.map((course) => course.id);
+            let courseData = await fetchDataWithCache('courses', courseNames);
+            if (!Array.isArray(courseData)) {
+                courseData = [courseData];
+            }
+
+            setCourseCards(
+                courseData.map((course) => (
+                    <CourseCard
+                        key={course.id}
+                        courseName={course.id}
+                        title={course.title}
+                        length={course.length}
+                        imageURL={course.imageURL}
+                        color={course.color}
+                    />
+                ))
+            );
+        })();
+    }, []);
 
     return (
         <div className="course-overview">
             <TopNavbar />
-            <h1 className="secondary-text">
-                {courses
-                    ? courses.careerPaths[careerPath]
-                        ? courses.careerPaths[careerPath].title
-                        : capitalize(careerPath)
-                    : 'Loading...'}
-            </h1>
+            <h1 className="secondary-text">{title}</h1>
             {found && user ? (
                 courseCards ? (
                     <CourseList courseCards={courseCards} />

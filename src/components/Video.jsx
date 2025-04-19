@@ -2,8 +2,8 @@ import React from 'react';
 import './styles/Video.css';
 
 export default function Video({ start, end, embedId }) {
-    const startString = start ? `&start=${start}` : '';
-    const endString = end ? `&end=${end}` : '';
+    const startString = start !== -1 ? `&start=${start}` : '';
+    const endString = end !== -1 ? `&end=${end}` : '';
 
     return (
         <div className="video">

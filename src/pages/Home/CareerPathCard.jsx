@@ -4,10 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import { setUserData } from '../../firebase';
 
-export default function CareerPathCard({ pathName, title, courses, saved }) {
+export default function CareerPathCard({ pathName, title, courses }) {
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
-    // const [saved, setSaved] = useState(user.careerPaths?.includes(pathName));
 
     function updateSaved(value) {
         if (value) {
@@ -33,11 +32,18 @@ export default function CareerPathCard({ pathName, title, courses, saved }) {
             <div className="top-bar">
                 <h2 className="title">{title}</h2>
                 <SaveButton
-                    saved={saved}
+                    saved={
+                        user.careerPaths
+                            ? user.careerPaths.includes(pathName)
+                            : false
+                    }
                     onClick={(e) => {
                         e.stopPropagation();
-                        updateSaved(!saved);
-                        // setSaved((prevSaved) => !prevSaved);
+                        updateSaved(
+                            user.careerPaths
+                                ? !user.careerPaths.includes(pathName)
+                                : true
+                        );
                     }}
                 />
             </div>

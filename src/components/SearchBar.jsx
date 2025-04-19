@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
-import { CourseContext } from '../context/CourseContext';
+import { useEffect, useState } from 'react';
 import filter from '../utils/filter';
 import './styles/SearchBar.css';
+import { useFetchWithCache } from '../hooks/useFetchWithCache';
 
 export default function SearchBar() {
-    const { courses } = useContext(CourseContext);
+    const { fetchDataWithCache } = useFetchWithCache();
     const [courseCards, setCourseCards] = useState();
     const [search, setSearch] = useState('');
     const [visible, setVisible] = useState(false);
@@ -29,26 +29,27 @@ export default function SearchBar() {
     useEffect(() => {
         if (search === '') {
             setCourseCards([]);
-        } else if (courses) {
-            const courseNames = courses.courses.courseNames;
-            const filteredCourses = filter(courseNames, search);
-
-            setCourseCards(
-                filteredCourses.map((name, i) => (
-                    <a
-                        className="result"
-                        href={`/#/course-overview/${name}`}
-                        key={i}
-                    >
-                        <img
-                            className="course-logo"
-                            src={courses.courses.cardData[name].imageURL}
-                            alt=""
-                        />
-                        {courses.courses.cardData[name].title}
-                    </a>
-                ))
-            );
+        } else {
+            (async () => {
+                const courses = await fetchDataWithCache('courses');
+                const filteredCourses = filter(courses, search);
+                setCourseCards(
+                    filteredCourses.map((course, i) => (
+                        <a
+                            className="result"
+                            href={`/#/course-overview/${course.id}`}
+                            key={i}
+                        >
+                            <img
+                                className="course-logo"
+                                src={course.imageURL}
+                                alt=""
+                            />
+                            {course.title}
+                        </a>
+                    ))
+                );
+            })();
         }
     }, [search]);
 

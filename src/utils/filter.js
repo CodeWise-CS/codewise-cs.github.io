@@ -3,5 +3,5 @@ export default function filter(array, searchString) {
 
     const sanitizedSearch = sanitize(searchString);
 
-    return array.filter((item) => sanitize(item).includes(sanitizedSearch));
+    return array.filter((item) => sanitize(item.id).includes(sanitizedSearch));
 }

@@ -10,34 +10,37 @@ export default function PathGrid({ course, courseName }) {
     const { user } = useContext(UserContext);
 
     useEffect(() => {
-        const validLessons = course.filter((item) => item.type !== 'exercise');
+        if (user) {
+            const validLessons = course.filter(
+                (item) => item.type !== 'exercise'
+            );
 
-        const completedLessons = user.coursesInProgress?.courseNames.includes(
-            courseName
-        )
-            ? user.coursesInProgress[courseName].currentLesson
-            : 0;
+            const completedLessons =
+                user.coursesInProgress?.courseNames.includes(courseName)
+                    ? user.coursesInProgress[courseName].currentLesson
+                    : 0;
 
-        const lessonElements = validLessons.map((item, index) =>
-            createLessonElement(item, index, completedLessons)
-        );
+            const lessonElements = validLessons.map((item, index) =>
+                createLessonElement(item, index, completedLessons)
+            );
 
-        const chunkedElements = chunkArray(lessonElements, 3);
+            const chunkedElements = chunkArray(lessonElements, 3);
 
-        const formattedRows = chunkedElements.map((item, index) => (
-            <React.Fragment key={index}>
-                {index !== 0 && (
-                    <div
-                        className={index % 2 ? 'right-line' : 'left-line'}
-                    ></div>
-                )}
-                <div className={`row ${index % 2 ? 'reverse' : ''}`}>
-                    {item}
-                </div>
-            </React.Fragment>
-        ));
+            const formattedRows = chunkedElements.map((item, index) => (
+                <React.Fragment key={index}>
+                    {index !== 0 && (
+                        <div
+                            className={index % 2 ? 'right-line' : 'left-line'}
+                        ></div>
+                    )}
+                    <div className={`row ${index % 2 ? 'reverse' : ''}`}>
+                        {item}
+                    </div>
+                </React.Fragment>
+            ));
 
-        setRows(formattedRows);
+            setRows(formattedRows);
+        }
     }, [course, courseName, user]);
 
     function createLessonElement(item, index, completedLessons) {
@@ -64,7 +67,7 @@ export default function PathGrid({ course, courseName }) {
                             }`
                         )
                     }
-                    lessonName={item.lessonName}
+                    lessonName={item.name}
                     completed={isCompleted}
                     progress={progress}
                 />

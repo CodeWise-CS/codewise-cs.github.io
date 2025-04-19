@@ -13,8 +13,7 @@ import IDE from './IDE';
 import Accordion from '../../components/Accordion';
 import UnautharizedLesson from './UnautharizedLesson';
 
-export default function Lesson({ lesson, handleEnd }) {
-    const { courses } = useContext(CourseContext);
+export default function Lesson({ lesson, handleEnd, languageID }) {
     const { user } = useContext(UserContext);
     const { course } = useParams();
     const queryParameters = new URLSearchParams(
@@ -84,7 +83,7 @@ export default function Lesson({ lesson, handleEnd }) {
                 );
             })
         );
-    }, [courses]);
+    }, []);
 
     return hasPermission ? (
         <div className="lesson">
@@ -144,8 +143,7 @@ export default function Lesson({ lesson, handleEnd }) {
                         </div>
                     </div>
                     <div className="code-container">
-                        {/* <h3 className="white-text section-header">Code</h3> */}
-                        <IDE languageID={courses.courses.languageIds[course]} />
+                        <IDE languageID={languageID} />
                     </div>
                 </div>
             )}

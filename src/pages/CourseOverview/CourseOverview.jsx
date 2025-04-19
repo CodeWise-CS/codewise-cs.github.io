@@ -1,33 +1,40 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import TopNavbar from '../../components/TopNavbar';
 import PathGrid from '../../components/PathGrid';
-import capitalize from '../../utils/capitalize';
 import { useNavigate, useParams } from 'react-router-dom';
-import { CourseContext } from '../../context/CourseContext';
 import './styles/CourseOverview.css';
 import { UserContext } from '../../context/UserContext';
+import { useFetchWithCache } from '../../hooks/useFetchWithCache';
 
 export default function CourseOverview() {
     const { course } = useParams();
-    const { courses } = useContext(CourseContext);
+    const { fetchDataWithCache } = useFetchWithCache();
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
-    let currentCourse = null;
-    let found = true;
+    const [currentCourse, setCurrentCourse] = useState(null);
+    const [found, setFound] = useState(true);
+    const [title, setTitle] = useState('Loading...');
 
-    if (courses) {
-        if (courses.courses.courseNames.includes(course)) {
-            currentCourse = courses.courses[course];
-        } else {
-            found = false;
-        }
-    }
+    useEffect(() => {
+        (async () => {
+            const lessonData = await fetchDataWithCache(
+                `courses/${course}/lessons`
+            );
+            setCurrentCourse(lessonData);
+            if (lessonData.length === 0) {
+                setFound(false);
+            }
+            const courseData = await fetchDataWithCache(`courses`, [course]);
+            setTitle(courseData.title);
+        })();
+    }, []);
+
+    useEffect(() => console.log(currentCourse), [currentCourse]);
 
     function checkCompletion() {
         if (
             user?.completedCourses &&
-            user.completedCourses.find((_course) => _course.name === course) &&
-            courses
+            user.completedCourses.find((_course) => _course.name === course)
         ) {
             navigate(`/completed/${course}`);
         }
@@ -37,18 +44,12 @@ export default function CourseOverview() {
 
     useEffect(() => {
         checkCompletion();
-    }, []); //[user, courses]);
+    }, []);
 
     return (
         <div className="course-overview">
             <TopNavbar />
-            <h1 className="secondary-text">
-                {courses
-                    ? courses.courses.cardData[course]
-                        ? courses.courses.cardData[course].title
-                        : capitalize(course)
-                    : 'Loading...'}
-            </h1>
+            {found && <h1 className="secondary-text">{title}</h1>}
             {found && user ? (
                 currentCourse ? (
                     <PathGrid course={currentCourse} courseName={course} />

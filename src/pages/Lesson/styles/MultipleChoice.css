@@ -1,12 +1,13 @@
 .multiple-choice .title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    white-space: pre-wrap;
+    margin-bottom: 20px;
 }
 
 .multiple-choice .answer-container {
-  display: flex;
-  flex-direction: column;
-  margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
 }

@@ -3,13 +3,13 @@ import Exercise from './Exercise';
 import Lesson from './Lesson';
 import { UserContext } from '../../context/UserContext';
 import { useNavigate, useParams } from 'react-router-dom';
-import { CourseContext } from '../../context/CourseContext';
 import './styles/LessonHandler.css';
 import { setUserData } from '../../firebase';
 import Loader from '../../components/Loader';
+import { useFetchWithCache } from '../../hooks/useFetchWithCache';
 
 export default function LessonHandler() {
-    const { courses } = useContext(CourseContext);
+    const { fetchDataWithCache } = useFetchWithCache();
     const { user } = useContext(UserContext);
     const { course } = useParams();
     const queryParameters = new URLSearchParams(
@@ -19,14 +19,14 @@ export default function LessonHandler() {
     const [lessonNumber, setLessonNumber] = useState(
         queryParameters.get('lesson')
     );
-    const [lesson, setLesson] = useState(null);
+    const [lessons, setLessons] = useState(null);
+    const [courseData, setCourseData] = useState(null);
     const navigate = useNavigate();
 
     function checkCompletion() {
         if (
             user?.completedCourses &&
-            user.completedCourses.find((_course) => _course.name === course) &&
-            courses
+            user.completedCourses.find((_course) => _course.name === course)
         ) {
             navigate(`/completed/${course}`);
         }
@@ -58,9 +58,10 @@ export default function LessonHandler() {
         navigate(`/completed/${course}`);
     }
 
-    function handleEnd(questionCount, correctCount) {
-        if (user) {
-            if (Number(lessonNumber) + 1 == courses.courses[course].length) {
+    async function handleEnd(questionCount, correctCount) {
+        if (user && courseData) {
+            const lessonCount = courseData.length;
+            if (Number(lessonNumber) + 1 == lessonCount) {
                 handleFinishedCourse(questionCount, correctCount);
                 return;
             }
@@ -91,23 +92,42 @@ export default function LessonHandler() {
         }
     }
 
+    function getCurrentLesson() {
+        const lesson = lessons.find(
+            (lesson) => lesson.id == `lesson${Number(lessonNumber) + 1}`
+        );
+        return lesson ? lesson : null;
+    }
+
     checkCompletion();
 
     useEffect(() => checkCompletion(), []);
 
     useEffect(() => {
-        if (courses) {
-            if (courses.courses.courseNames.includes(course)) {
-                setLesson(courses.courses[course][lessonNumber]);
-            }
-        }
-    }, [courses, lessonNumber]);
+        (async () => {
+            const courseData = await fetchDataWithCache('courses', [course]);
+            setCourseData(courseData);
+        })();
+    }, []);
 
-    return lesson ? (
-        lesson.type === 'exercise' ? (
-            <Exercise handleEnd={handleEnd} lesson={lesson} />
+    useEffect(() => {
+        (async () => {
+            const lessons = await fetchDataWithCache(
+                `courses/${course}/lessons`
+            );
+            setLessons(lessons);
+        })();
+    }, []);
+
+    return lessons && getCurrentLesson() ? (
+        getCurrentLesson().type === 'exercise' ? (
+            <Exercise handleEnd={handleEnd} lesson={getCurrentLesson()} />
         ) : (
-            <Lesson handleEnd={handleEnd} lesson={lesson} />
+            <Lesson
+                handleEnd={handleEnd}
+                lesson={getCurrentLesson()}
+                languageID={courseData?.languageId}
+            />
         )
     ) : (
         <Loader />

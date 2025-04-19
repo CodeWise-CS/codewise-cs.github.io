@@ -4,7 +4,7 @@ import ProgressBar from '../../components/ProgressBar';
 import TopNavbar from '../../components/TopNavbar';
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
-import { CourseContext } from '../../context/CourseContext';
+import { useFetchWithCache } from '../../hooks/useFetchWithCache';
 import { auth } from '../../firebase';
 import Certificate from './Certificate';
 import Loader from '../../components/Loader';
@@ -12,24 +12,34 @@ import Loader from '../../components/Loader';
 export default function CourseCompletion() {
     const { course } = useParams();
     const { user } = useContext(UserContext);
-    const { courses } = useContext(CourseContext);
+    const { fetchDataWithCache } = useFetchWithCache();
     const [accuracy, setAccuracy] = useState(0);
+    const [currentCourse, setCurrentCourse] = useState();
 
     useEffect(() => {
-        if (courses && user) {
+        (async () => {
+            const courses = await fetchDataWithCache('courses');
+            setCurrentCourse(
+                courses.filter((_course) => _course.id == course)[0]
+            );
+        })();
+    }, []);
+
+    useEffect(() => {
+        if (user?.completedCourses) {
             setAccuracy(
                 user.completedCourses.find(
                     (completedCourse) => completedCourse.name === course
                 )?.accuracy
             );
         }
-    }, [courses, user]);
+    }, [user]);
 
     return (
         <div className="course-completion">
             <TopNavbar />
-            {courses && user ? (
-                !courses.courses.courseNames.includes(course) ? (
+            {user?.completedCourses ? (
+                !currentCourse ? (
                     <p>Course not found</p>
                 ) : user.completedCourses.find(
                       (completedCourse) => completedCourse.name === course
@@ -37,7 +47,7 @@ export default function CourseCompletion() {
                     <>
                         <h1 className="secondary-text title">
                             Congratulations for completing the{' '}
-                            {courses.courses.cardData[course]?.title} course!
+                            {currentCourse.title} course!
                         </h1>
                         <div className="main-content">
                             <ProgressBar progress={accuracy} />
@@ -52,10 +62,8 @@ export default function CourseCompletion() {
                                     fullName={auth.currentUser.displayName}
                                     username={user.username}
                                     accuracy={accuracy}
-                                    course={course}
-                                    courseDisplayName={
-                                        courses.courses.cardData[course]?.title
-                                    }
+                                    imageURL={currentCourse.imageURL}
+                                    courseDisplayName={currentCourse.title}
                                 />
                             </div>
                         </div>
