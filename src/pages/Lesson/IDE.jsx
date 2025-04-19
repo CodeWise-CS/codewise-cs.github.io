@@ -157,7 +157,7 @@ export default function IDE({ languageID }) {
 
     const templates = {
         react: 'react',
-        'html-css': 'static',
+        'html/css': 'static',
     };
 
     let sandpackElement = (
