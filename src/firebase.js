@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signOut } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
-import { getDatabase, ref, set, child, get, remove } from 'firebase/database';
+import { getDatabase, ref, set, child, get } from 'firebase/database';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: 'AIzaSyCMdByUlf7Cg-fCaTl2McQ2FTCA0GAN77I',
@@ -18,6 +19,7 @@ const database = getDatabase();
 export const auth = getAuth(app);
 export default app;
 export const storage = getStorage();
+export const firestore = getFirestore();
 
 export function logOut() {
     signOut(auth);
@@ -64,4 +66,21 @@ export function setUserData(value, dirPath = '') {
     const userId = auth.currentUser.uid;
 
     set(ref(database, `users/${userId}/${dirPath}`), value);
+}
+
+export async function fetchData(collectionPath) {
+    try {
+        const collectionRef = collection(firestore, collectionPath);
+        const querySnapshot = await getDocs(collectionRef);
+        const documents = [];
+
+        querySnapshot.forEach((doc) => {
+            documents.push({ id: doc.id, ...doc.data() });
+        });
+
+        return documents;
+    } catch (error) {
+        console.error('Error fetching collection:', error);
+        return null;
+    }
 }
