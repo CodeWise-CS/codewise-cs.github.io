@@ -4,16 +4,16 @@ import App from './App.jsx';
 import './index.css';
 import { HashRouter } from 'react-router-dom';
 import { UserContextProvider } from './context/UserContext.jsx';
-import { CourseContextProvider } from './context/CourseContext.jsx';
+import { CacheProvider } from './context/CacheContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <CourseContextProvider>
+        <CacheProvider>
             <UserContextProvider>
                 <HashRouter>
                     <App />
                 </HashRouter>
             </UserContextProvider>
-        </CourseContextProvider>
+        </CacheProvider>
     </React.StrictMode>
 );
