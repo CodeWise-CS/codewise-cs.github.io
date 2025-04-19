@@ -5,7 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { getDatabase, ref, onValue } from 'firebase/database';
 
-const ProtectedRoute = ({ element }) => {
+export default function ProtectedRoute({ element }) {
     const { user, setUser } = useContext(UserContext);
     const [authChecked, setAuthChecked] = useState(false);
 
@@ -13,6 +13,9 @@ const ProtectedRoute = ({ element }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
                 setUser(currentUser);
+                alert(
+                    'Notice: CodeWise is an open-source project that is still in development. The courses are not completed and you may find bugs.\n\nFor information about contributing to the website, please visit https://github.com/CodeWise-CS/codewise-cs.github.io\nTo contribute to the curriculum, please visit https://github.com/CodeWise-CS/codewise-curriculum'
+                );
             } else {
                 setUser(null);
             }
@@ -47,6 +50,4 @@ const ProtectedRoute = ({ element }) => {
     }
 
     return user ? element : <Navigate to="/login" />;
-};
-
-export default ProtectedRoute;
+}

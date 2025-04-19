@@ -12,14 +12,6 @@ export default function Dashboard() {
     const [courseData, setCourseData] = useState([]);
     const [pathCards, setPathCards] = useState([]);
 
-    useEffect(
-        () =>
-            alert(
-                'Notice: CodeWise is an open-source project that is still in development. The courses are not completed and you may find bugs.\n\nFor information about contributing to the website, please visit https://github.com/CodeWise-CS/codewise-cs.github.io\nTo contribute to the curriculum, please visit https://github.com/CodeWise-CS/codewise-curriculum'
-            ),
-        []
-    ); // Temporary notice that this website is still in development
-
     useEffect(() => {
         (async () => {
             const careerPaths = await fetchDataWithCache('career-paths');
